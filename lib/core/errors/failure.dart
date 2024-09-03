@@ -1,5 +1,4 @@
 import "app_exception.dart";
-import "connection/http_call_exception.dart";
 
 /// The abstract class for the failures in the application
 abstract class Failure {
@@ -30,47 +29,6 @@ enum FailureLevel {
 
   /// Information error
   info,
-}
-
-/// Failure for the Http calls
-class HttpCallFailure extends Failure {
-  /// Failure for the Http calls
-  HttpCallFailure({
-    required super.message,
-    required super.title,
-    required super.level,
-  });
-
-  /// Create a [HttpCallFailure] from a [HttpCallException]
-  factory HttpCallFailure.fromException(HttpCallException exception) =>
-      HttpCallFailure(
-        title: exception.title,
-        message: exception.message,
-        level: _getLevel(exception.type),
-      );
-
-  static FailureLevel _getLevel(HttpExceptions type) {
-    switch (type) {
-      case HttpExceptions.connectionError:
-      case HttpExceptions.clientOffline:
-        return FailureLevel.warning;
-      case HttpExceptions.serverDown:
-      case HttpExceptions.serverError:
-        return FailureLevel.error;
-      case HttpExceptions.unauthorized:
-      case HttpExceptions.expiredToken:
-        return FailureLevel.warning;
-      case HttpExceptions.clientError:
-      case HttpExceptions.badRequest:
-        return FailureLevel.warning;
-      case HttpExceptions.cancelRequest:
-      case HttpExceptions.other:
-      case HttpExceptions.badCertificate:
-        return FailureLevel.info;
-      default:
-        return FailureLevel.error;
-    }
-  }
 }
 
 /// Failure used for the application side

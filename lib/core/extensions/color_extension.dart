@@ -8,7 +8,12 @@ extension ColorExtension on Color {
   ///
   /// String is in the format "aabbcc"
   /// or "ffaabbcc" with an optional leading "#".
-  static Color fromHex(String hexString) {
+  static Color? fromHex(String? hexString) {
+    if (hexString == null) return null;
+    if (hexString.isEmpty) return null;
+    if (hexString.length < 6) return null;
+    if (hexString.length > 9) return null;
+
     final StringBuffer buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) {
       buffer.write("ff");

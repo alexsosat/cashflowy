@@ -1,11 +1,10 @@
 import "package:flutter/material.dart";
-import "package:flutter_flavor/flutter_flavor.dart";
 
 import "core/constants/theme/material_theme.dart";
 import "core/constants/theme/util.dart";
 import "core/routes/app_router.dart";
 
-final _appRouter = AppRouter();   
+final _appRouter = AppRouter();
 
 /// [CashflowyApp] is the entry point of the application.
 class CashflowyApp extends StatelessWidget {
@@ -13,22 +12,19 @@ class CashflowyApp extends StatelessWidget {
   const CashflowyApp({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-     FlavorBanner(
-      child: MaterialApp.router(
+  Widget build(BuildContext context) => MaterialApp.router(
         title: "Cashflowy",
         debugShowCheckedModeBanner: false,
 
-        //Theming  
+        //Theming
         themeMode: ThemeMode.system,
-            theme: MaterialTheme(createTextTheme(context, "Poppins", "Poppins"),)
-                .light(),
-            darkTheme:
-                MaterialTheme(createTextTheme(context, "Poppins", "Poppins"),)
-                    .dark(),
-
+        theme: MaterialTheme(
+          createTextTheme(context, "Poppins", "Poppins"),
+        ).light(),
+        darkTheme: MaterialTheme(
+          createTextTheme(context, "Poppins", "Poppins"),
+        ).dark(),
 
         routerConfig: _appRouter.config(),
-      ),
-    );
+      );
 }
