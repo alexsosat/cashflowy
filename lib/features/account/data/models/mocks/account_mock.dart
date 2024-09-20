@@ -10,7 +10,7 @@ class AccountMock implements MockData<AccountItemsCompanion> {
         name: faker.lorem.words(3).join(" "),
         currency: "mxn",
         color: Value(
-          faker.color.color(),
+          faker.color.rgbColor(),
         ),
         type: Value(
           faker.randomGenerator.element(AccountType.values),

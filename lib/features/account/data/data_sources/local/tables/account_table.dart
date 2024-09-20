@@ -1,9 +1,10 @@
 import "package:drift/drift.dart";
 
+import "../../../../../bank/data/data_sources/tables/bank_table.dart";
 import "../../../../business/entities/account_type.dart";
 
 /// This is the table where the account information will be stored
-class AccountItems extends Table {
+class AccountTable extends Table {
   /// Unique identifier of the account
   IntColumn get id => integer().autoIncrement()();
 
@@ -23,4 +24,7 @@ class AccountItems extends Table {
   /// This value is stored as the minified expression of the currency
   /// Eg. mxn, usd
   TextColumn get currency => text().withLength(max: 12)();
+
+  /// Adds a reference for the bank that the account belongs to
+  IntColumn get bankId => integer().nullable().references(BankTable, #id)();
 }

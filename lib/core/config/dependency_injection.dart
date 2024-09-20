@@ -7,16 +7,22 @@ import "../services/database/app_database.dart";
 /// Class to inject the dependencies in the application
 class DependencyInjection {
   /// Inject the services in the application
-  static Future<void> criticalServices() async {
+  static Future<void> injectCriticalServices() async {
     WidgetsFlutterBinding.ensureInitialized();
   }
 
   /// Initialize the services in the application
-  static Future<void> initializeServices() async {
+  static Future<void> injectServices() async {
     GetIt.I.registerSingleton(
       AppDatabase(
         NativeDatabase.memory(),
       ),
     );
   }
+
+  /// Inject the repositories in the application
+  ///
+  /// This injects the repositories when the application is running
+  /// These repositories are loaded during the splash screen
+  static void injectRepositories() {}
 }

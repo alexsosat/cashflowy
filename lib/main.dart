@@ -4,7 +4,7 @@ import "cashflowy_app.dart";
 import "core/config/dependency_injection.dart";
 
 void main() async {
-  await DependencyInjection.criticalServices();
+  await DependencyInjection.injectCriticalServices();
 
   runApp(const CashflowyApp());
 }
