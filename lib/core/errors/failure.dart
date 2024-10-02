@@ -68,7 +68,7 @@ class AppFailure extends Failure {
   /// [exception] is the exception that was thrown
   ///
   /// This is used when the error is related to cache operations
-  factory AppFailure.cacheException(CacheException exception) => AppFailure(
+  factory AppFailure.cacheException(DriftException exception) => AppFailure(
         title: exception.title,
         message: exception.message,
         level: FailureLevel.error,

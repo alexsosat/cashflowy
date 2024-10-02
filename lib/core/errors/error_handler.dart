@@ -15,7 +15,7 @@ class ErrorHandler {
   ) async {
     try {
       return Right(await function());
-    } on CacheException catch (exception) {
+    } on DriftException catch (exception) {
       return Left(AppFailure.cacheException(exception));
     } catch (e) {
       return Left(

@@ -1,0 +1,30 @@
+{
+  "@@locale": "en",
+  "appList": "App list",
+  "appNotificationEnableQuestion": "Are you sure you want to {action} notifications for the {packageName} application?",
+  "cancel": "cancel",
+  "cannotGetFailureFromLeft": "Cannot get failure from Left",
+  "cannotGetFailureFromRight": "Cannot get failure from Right",
+  "cannotGetValueFromLeft": "Cannot get value from Left",
+  "cannotGetValueFromRight": "Cannot get value from Right",
+  "changeSaveNotificationExceptionMessage": "An error occurred while changing the save notification value",
+  "confirm": "confirm",
+  "deleteAppNotificationsWarningMessage": "This action will delete all {packageName} notifications.",
+  "deleteNotificationsExceptionMessage": "An error occurred while deleting notifications",
+  "disable": "disable",
+  "enable": "enable",
+  "enableAppNotificationsWarningMessage": "This action will save all incoming notifications from this app.",
+  "getAppExceptionMessage": "An error occurred while getting the application",
+  "getAppRegexExceptionMessage": "An error occurred when obtaining the regular expressions from the application",
+  "getAppsExceptionMessage": "An error occurred when obtaining the applications",
+  "@getAppsExceptionMessage": {
+    "description": "Message to show when an error occurs when obtaining the applications"
+  },
+  "getNotificationsExceptionMessage": "An error occurred when getting notifications from the application",
+  "loading": "loading",
+  "noAppsFound": "No apps found",
+  "noInfoAvailable": "No info available",
+  "saveAppExceptionMessage": "An error occurred while saving the application",
+  "saveNotificationExceptionMessage": "An error occurred while saving the notification",
+  "unexpectedError": "unexpected error"
+}

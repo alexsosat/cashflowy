@@ -1,18 +1,7 @@
-import "dart:convert";
 import "package:shared_preferences/shared_preferences.dart";
 
-
-
 /// Local data source for the Home collection
-abstract class HomeLocalDataSource {
-
-  
-
-  
-
-}
-
-
+abstract class HomeLocalDataSource {}
 
 /// Local data source for the Home collection
 class HomeLocalDataSourceImpl implements HomeLocalDataSource {
@@ -21,9 +10,4 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
 
   /// Shared preferences instance
   final SharedPreferences localSource;
-
-  
-
-  
-
 }

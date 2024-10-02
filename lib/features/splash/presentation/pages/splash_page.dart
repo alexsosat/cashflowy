@@ -4,6 +4,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 
 import "../../../../core/constants/theme/app_separators.dart";
 import "../../../../core/extensions/theme_extension.dart";
+import "../../../../core/routes/app_router.gr.dart";
 import "../cubits/splash_screen_cubit.dart";
 
 /// The splash screen page.
@@ -102,7 +103,8 @@ class _SplashScreenContentState extends State<_SplashScreenContent>
   }
 
   void _onPageExit() {
-    // TODO: Move to home page
-    // context.router.replace(const HomeRoute());
+    context.router.replace(
+      const HomeRoute(),
+    );
   }
 }

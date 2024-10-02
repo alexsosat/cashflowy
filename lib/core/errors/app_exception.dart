@@ -19,9 +19,9 @@ class AppException implements Exception {
 }
 
 /// Exception thrown when a connection to the local database fails.
-class CacheException extends AppException {
+class DriftException extends AppException {
   /// Exception thrown when a connection to the local database fails.
-  CacheException({
+  DriftException({
     super.title = "Error al acceder a información en el dispositivo",
     super.message = "Por favor, intenta nuevamente.",
   });

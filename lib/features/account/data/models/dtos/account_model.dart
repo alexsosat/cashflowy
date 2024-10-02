@@ -17,7 +17,7 @@ class AccountModel extends AccountEntity {
 
   /// Factory method to create an account model instance from a Drift [AccountItem]
   factory AccountModel.fromDrift({
-    required AccountItem account,
+    required AccountTableData account,
   }) =>
       AccountModel(
         id: account.id,

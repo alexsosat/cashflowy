@@ -1,18 +1,7 @@
-import "dart:convert";
 import "package:shared_preferences/shared_preferences.dart";
 
-
-
 /// Local data source for the Transaction collection
-abstract class TransactionLocalDataSource {
-
-  
-
-  
-
-}
-
-
+abstract class TransactionLocalDataSource {}
 
 /// Local data source for the Transaction collection
 class TransactionLocalDataSourceImpl implements TransactionLocalDataSource {
@@ -21,9 +10,4 @@ class TransactionLocalDataSourceImpl implements TransactionLocalDataSource {
 
   /// Shared preferences instance
   final SharedPreferences localSource;
-
-  
-
-  
-
 }

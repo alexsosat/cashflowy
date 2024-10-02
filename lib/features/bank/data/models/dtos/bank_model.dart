@@ -18,7 +18,7 @@ class BankModel extends BankEntity {
 
   /// Factory method to create an account model instance from a Drift [AccountItem]
   factory BankModel.fromDrift({
-    required BankItem item,
+    required BankTableData item,
   }) =>
       BankModel(
         id: item.id,

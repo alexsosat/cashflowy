@@ -1,8 +1,9 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
-import "../cubit_states/state_mixin.dart";
-import "../errors/failure.dart";
+import "../../../../core/cubit_states/state_mixin.dart";
+import "../../../../core/errors/failure.dart";
+import "../../../../core/localization/l10n.dart";
 
 /// A widget that loads the state of a [StateStreamable] and shows different
 /// widgets based on the state.
@@ -54,9 +55,15 @@ class CubitStateMixinBuilder<T extends StateStreamable<StateMixin<B>>, B>
               return onSuccess(state.data as B);
             case WidgetStatus.failure:
               return onFailure?.call(state.failure!) ??
-                  Text(state.failure?.title ?? "Ocurrió un error inesperado");
+                  Text(
+                    state.failure?.title ??
+                        AppLocalizations.current.unexpectedError,
+                  );
             case WidgetStatus.empty:
-              return onEmpty ?? const Text("No hay información disponible");
+              return onEmpty ??
+                  Text(
+                    AppLocalizations.current.noInfoAvailable,
+                  );
           }
         },
       );
