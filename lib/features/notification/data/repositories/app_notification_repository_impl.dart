@@ -34,7 +34,7 @@ class AppNotificationRepositoryImpl implements AppNotificationRepository {
       );
 
   @override
-  Future<Either<Failure, int>> saveApp({
+  Future<Either<Failure, AppNotificationModel>> saveApp({
     required AppNotificationParams params,
   }) =>
       ErrorHandler.handleCacheCall(

@@ -23,6 +23,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m0(action, packageName) =>
       "Are you sure you want to ${action} notifications for the ${packageName} application?";
 
+  static String m1(packageName) =>
+      "This action will delete all ${packageName} notifications.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appList": MessageLookupByLibrary.simpleMessage("App list"),
@@ -40,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "An error occurred while changing the save notification value"),
         "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
+        "deleteAppNotificationsWarningMessage": m1,
         "deleteNotificationsExceptionMessage":
             MessageLookupByLibrary.simpleMessage(
                 "An error occurred while deleting notifications"),

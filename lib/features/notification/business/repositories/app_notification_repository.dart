@@ -21,7 +21,9 @@ abstract class AppNotificationRepository {
   });
 
   /// Save an app that has sent notifications to the phone
-  Future<Either<Failure, int>> saveApp({
+  ///
+  /// Returns the created app
+  Future<Either<Failure, AppNotificationEntity>> saveApp({
     required AppNotificationParams params,
   });
 

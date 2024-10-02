@@ -20,7 +20,7 @@ class __AppNotificationTileState extends State<_AppNotificationTile> {
 
   @override
   Widget build(BuildContext context) => ListTile(
-        onTap: () {},
+        onTap: _saveNotifications ? _goToNotificationPage : null,
         title: Text(widget.app.packageName),
         leading: widget.app.icon != null
             ? CircleAvatar(
@@ -40,7 +40,7 @@ class __AppNotificationTileState extends State<_AppNotificationTile> {
         ),
       );
 
-  void _toggleSaveNotifications(bool value) async {
+  Future _toggleSaveNotifications(bool value) async {
     final action = value
         ? AppLocalizations.current.enable
         : AppLocalizations.current.disable;
@@ -60,10 +60,24 @@ class __AppNotificationTileState extends State<_AppNotificationTile> {
             ),
     );
 
-    // TODO: Execute use case to enable or disable notifications
+    if (!mounted || !dialogResponse) return;
+
+    await AppNotificationController.changeNotificationsValueSaveNotifications(
+      context,
+      ChangeAppNotificationSaveNotificationParams(
+        appId: widget.app.id,
+        saveNotifications: value,
+      ),
+    );
 
     setState(() {
       _saveNotifications = value;
     });
   }
+
+  void _goToNotificationPage() => context.router.push(
+        AppNotificationItemRoute(
+          app: widget.app,
+        ),
+      );
 }

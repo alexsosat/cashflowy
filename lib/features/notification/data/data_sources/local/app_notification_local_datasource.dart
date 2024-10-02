@@ -27,8 +27,8 @@ abstract class AppNotificationLocalDataSource {
 
   /// Save an app that has sent notifications to the phone
   ///
-  /// Returns the id of the saved app
-  Future<int> saveApp({
+  /// Returns the created app
+  Future<AppNotificationModel> saveApp({
     required AppNotificationParams params,
   });
 
@@ -114,7 +114,7 @@ class AppNotificationLocalDataSourceImpl
   }
 
   @override
-  Future<int> saveApp({
+  Future<AppNotificationModel> saveApp({
     required AppNotificationParams params,
   }) async {
     try {
@@ -126,7 +126,15 @@ class AppNotificationLocalDataSourceImpl
                 ),
               );
 
-      return id;
+      final app = await (localSource.select(localSource.appNotificationTable)
+            ..where(
+              (apps) => apps.id.equals(id),
+            ))
+          .getSingle();
+
+      return AppNotificationModel.fromDatabase(
+        companion: app,
+      );
     } catch (e) {
       throw DriftException(
         title: AppLocalizations.current.saveAppExceptionMessage,

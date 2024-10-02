@@ -70,6 +70,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Notificaciones de la aplicación habilitadas`
+  String get appNotificationsEnabledMessage {
+    return Intl.message(
+      'Notificaciones de la aplicación habilitadas',
+      name: 'appNotificationsEnabledMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `cancelar`
   String get cancel {
     return Intl.message(
@@ -150,6 +160,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Se eliminaron {deletedNotifications} notificaciones`
+  String deletedNotificationsCountMessage(Object deletedNotifications) {
+    return Intl.message(
+      'Se eliminaron $deletedNotifications notificaciones',
+      name: 'deletedNotificationsCountMessage',
+      desc: '',
+      args: [deletedNotifications],
+    );
+  }
+
   /// `Ocurrió un error al eliminar las notificaciones`
   String get deleteNotificationsExceptionMessage {
     return Intl.message(
@@ -170,6 +190,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Deshabilitando notificaciones para la aplicación`
+  String get disablingAppNotificationsLoadingMessage {
+    return Intl.message(
+      'Deshabilitando notificaciones para la aplicación',
+      name: 'disablingAppNotificationsLoadingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `habilitar`
   String get enable {
     return Intl.message(
@@ -185,6 +215,16 @@ class AppLocalizations {
     return Intl.message(
       'Esta acción guardará todas las notificaciones provenientes de esta aplicación',
       name: 'enableAppNotificationsWarningMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Habilitando notificaciones para la aplicación`
+  String get enablingAppNotificationsLoadingMessage {
+    return Intl.message(
+      'Habilitando notificaciones para la aplicación',
+      name: 'enablingAppNotificationsLoadingMessage',
       desc: '',
       args: [],
     );
@@ -275,6 +315,16 @@ class AppLocalizations {
     return Intl.message(
       'Ocurrió un error al guardar la notificación',
       name: 'saveNotificationExceptionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operación exitosa`
+  String get successOperation {
+    return Intl.message(
+      'Operación exitosa',
+      name: 'successOperation',
       desc: '',
       args: [],
     );

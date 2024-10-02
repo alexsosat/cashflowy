@@ -26,11 +26,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m1(packageName) =>
       "Esta acción eliminará todas las notificaciones de ${packageName}";
 
+  static String m2(deletedNotifications) =>
+      "Se eliminaron ${deletedNotifications} notificaciones";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appList":
             MessageLookupByLibrary.simpleMessage("Listado de aplicaciones"),
         "appNotificationEnableQuestion": m0,
+        "appNotificationsEnabledMessage": MessageLookupByLibrary.simpleMessage(
+            "Notificaciones de la aplicación habilitadas"),
         "cancel": MessageLookupByLibrary.simpleMessage("cancelar"),
         "cannotGetFailureFromLeft": MessageLookupByLibrary.simpleMessage(
             "No se pudo obtener el error de Left"),
@@ -48,11 +53,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNotificationsExceptionMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Ocurrió un error al eliminar las notificaciones"),
+        "deletedNotificationsCountMessage": m2,
         "disable": MessageLookupByLibrary.simpleMessage("deshabilitar"),
+        "disablingAppNotificationsLoadingMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Deshabilitando notificaciones para la aplicación"),
         "enable": MessageLookupByLibrary.simpleMessage("habilitar"),
         "enableAppNotificationsWarningMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Esta acción guardará todas las notificaciones provenientes de esta aplicación"),
+        "enablingAppNotificationsLoadingMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "Habilitando notificaciones para la aplicación"),
         "getAppExceptionMessage": MessageLookupByLibrary.simpleMessage(
             "Ocurrió un error al obtener la aplicación"),
         "getAppRegexExceptionMessage": MessageLookupByLibrary.simpleMessage(
@@ -71,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "saveNotificationExceptionMessage":
             MessageLookupByLibrary.simpleMessage(
                 "Ocurrió un error al guardar la notificación"),
+        "successOperation":
+            MessageLookupByLibrary.simpleMessage("Operación exitosa"),
         "unexpectedError":
             MessageLookupByLibrary.simpleMessage("Ocurrió un error inesperado")
       };

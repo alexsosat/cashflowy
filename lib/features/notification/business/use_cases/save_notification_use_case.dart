@@ -28,6 +28,7 @@ class SaveNotificationUseCase implements UseCase<int?, SaveNotificationParams> {
   Future<Either<Failure, int?>> call({
     required SaveNotificationParams params,
   }) async {
+    // Get the app by its package name
     final appsResponse = await appNotificationRepository.getAppByPackageName(
       params: ByPackageParams(package: params.appPackageName),
     );
@@ -38,8 +39,10 @@ class SaveNotificationUseCase implements UseCase<int?, SaveNotificationParams> {
       );
     }
 
-    final app = appsResponse.getValue<AppNotificationEntity?>();
+    AppNotificationEntity? app =
+        appsResponse.getValue<AppNotificationEntity?>();
 
+    // Save the app if it doesn't exist
     if (app == null) {
       final saveAppResponse = await appNotificationRepository.saveApp(
         params: AppNotificationParams(
@@ -54,10 +57,11 @@ class SaveNotificationUseCase implements UseCase<int?, SaveNotificationParams> {
         );
       }
 
-      return const Right(
-        null,
-      );
-    } else if (!app.saveNotifications) {
+      app = saveAppResponse.getValue<AppNotificationEntity>();
+    }
+
+    // if the app doesn't save notifications, return null
+    if (!app.saveNotifications) {
       return const Right(
         null,
       );
@@ -65,6 +69,7 @@ class SaveNotificationUseCase implements UseCase<int?, SaveNotificationParams> {
 
     params.appId = app.id;
 
+    // Check if the description has a regex match
     final regexResponse = await appNotificationRepository.getAppRegex(
       params: ByIdParams(id: app.id),
     );

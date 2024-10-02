@@ -21,5 +21,9 @@ class AppRouter extends RootStackRouter {
           path: RouteNames.appsList,
           page: AppNotificationListRoute.page,
         ),
+        AutoRoute(
+          path: RouteNames.appNotificationItem,
+          page: AppNotificationItemRoute.page,
+        ),
       ];
 }

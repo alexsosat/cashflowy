@@ -8,4 +8,5 @@ class RouteNames {
   static const initial = "/";
   static const home = "/home";
   static const appsList = "/notifications/apps";
+  static const appNotificationItem = "/notifications/apps/:app";
 }

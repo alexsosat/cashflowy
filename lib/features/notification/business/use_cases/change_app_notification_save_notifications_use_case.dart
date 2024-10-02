@@ -8,10 +8,10 @@ import '../../data/models/params/params.dart';
 import '../repositories/repositories.dart';
 
 /// Use case for changing the value of notifications save of an app
-class SetAppNotificationSaveNotificationsUseCase
+class ChangeAppNotificationSaveNotificationsUseCase
     implements UseCase<int, ChangeAppNotificationSaveNotificationParams> {
   /// Use case for changing the value of notifications save of an app
-  SetAppNotificationSaveNotificationsUseCase({
+  ChangeAppNotificationSaveNotificationsUseCase({
     required this.appNotificationRepository,
     required this.notificationRepository,
   });
