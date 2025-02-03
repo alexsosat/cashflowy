@@ -13,17 +13,5 @@ class AppRouter extends RootStackRouter {
           path: RouteNames.initial,
           page: SplashRoute.page,
         ),
-        AutoRoute(
-          path: RouteNames.home,
-          page: HomeRoute.page,
-        ),
-        AutoRoute(
-          path: RouteNames.appsList,
-          page: AppNotificationListRoute.page,
-        ),
-        AutoRoute(
-          path: RouteNames.appNotificationItem,
-          page: AppNotificationItemRoute.page,
-        ),
       ];
 }

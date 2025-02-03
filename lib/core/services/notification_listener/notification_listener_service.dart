@@ -5,7 +5,6 @@ import "package:drift/native.dart";
 import "package:flutter_notification_listener/flutter_notification_listener.dart";
 import "package:get_it/get_it.dart";
 
-import "../../../features/notification/notification.dart";
 import "../database/app_database.dart";
 
 /// Class to listen to notifications
@@ -67,36 +66,6 @@ class NotificationListenerService {
         NativeDatabase.memory(),
       );
     }
-
-    final notificationRepository = NotificationRepositoryImpl(
-      localDataSource: NotificationLocalDataSourceImpl(
-        localSource: db,
-      ),
-    );
-
-    final appNotificationRepository = AppNotificationRepositoryImpl(
-      localDataSource: AppNotificationLocalDataSourceImpl(
-        localSource: db,
-      ),
-    );
-
-    await SaveNotificationUseCase(
-      notificationRepository: notificationRepository,
-      appNotificationRepository: appNotificationRepository,
-    ).call(
-      params: SaveNotificationParams(
-        appPackageName: evt.packageName ?? "Uknown",
-        appIcon: evt.largeIcon,
-        title: evt.title ?? "",
-        description: evt.text ?? "",
-        date: evt.timestamp != null
-            ? DateTime.fromMicrosecondsSinceEpoch(evt.timestamp!)
-            : DateTime.now(),
-        infoText: evt.raw?["infoText"],
-        bigText: evt.raw?["bigText"],
-        subText: evt.raw?["subText"],
-      ),
-    );
 
     // send data to ui thread if necessary.
     // try to send the event to ui

@@ -2,10 +2,10 @@ import "dart:ui";
 
 import "package:equatable/equatable.dart";
 
-import "account_type.dart";
+import "enums/account_type_enum.dart";
 
 /// Entity that contains the data of the Account.
-class AccountEntity extends Equatable {
+abstract class AccountEntity extends Equatable {
   /// Entity that contains the data of the Account.
   const AccountEntity({
     required this.id,
@@ -25,20 +25,8 @@ class AccountEntity extends Equatable {
   final Color? color;
 
   /// Type of account
-  final AccountType type;
+  final AccountTypeEnum type;
 
   /// Currency of the account
   final String currency;
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        color,
-        type,
-        currency,
-      ];
-
-  @override
-  bool get stringify => true;
 }

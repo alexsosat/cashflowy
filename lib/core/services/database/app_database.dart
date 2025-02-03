@@ -1,16 +1,8 @@
 import "package:drift/drift.dart";
 
-import "../../../features/account/business/entities/account_type.dart";
+import "../../../features/account/business/entities/enums/account_type_enum.dart";
 import "../../../features/account/data/data_sources/local/tables/account_table.dart";
 import "../../../features/account/data/models/mocks/account_mock.dart";
-import "../../../features/bank/data/data_sources/tables/bank_table.dart";
-import "../../../features/category/data/data_sources/local/tables/category_table.dart";
-import "../../../features/life_span/business/entities/life_span_units.dart";
-import "../../../features/life_span/data/data_sources/local/tables/life_span_table.dart";
-import "../../../features/notification/data/data_sources/local/tables/tables.dart";
-import "../../../features/report/data/data_sources/local/tables/account_report_table.dart";
-import "../../../features/transaction/business/entities/transaction_types.dart";
-import "../../../features/transaction/data/data_sources/local/tables/transaction_table.dart";
 
 part "app_database.g.dart";
 
@@ -18,14 +10,6 @@ part "app_database.g.dart";
 @DriftDatabase(
   tables: [
     AccountTable,
-    BankTable,
-    CategoryTable,
-    LifeSpanTable,
-    AccountReportTable,
-    TransactionTable,
-    AppNotificationTable,
-    AppRegexTable,
-    NotificationTable,
   ],
 )
 class AppDatabase extends _$AppDatabase {
