@@ -51,7 +51,7 @@ class NotificationListenerService {
 
   /// Event triggered when a notification is received
   static void onFrontData(dynamic data) {
-    print("Front event: ${data.toString()}");
+    print("Front event: ${data}");
   }
 
   @pragma("vm:entry-point")

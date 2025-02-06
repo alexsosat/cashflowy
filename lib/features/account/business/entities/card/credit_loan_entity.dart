@@ -5,7 +5,7 @@ class CreditLoanEntity extends Equatable {
   /// Information of a credit loan
   const CreditLoanEntity({
     required this.amountLimit,
-    required this.interestRate,
+    required this.mothlyInterestRate,
     required this.statementClosingDay,
     required this.statementPaymentDay,
   });
@@ -14,7 +14,7 @@ class CreditLoanEntity extends Equatable {
   final double amountLimit;
 
   /// Interest rate of the credit loan
-  final double interestRate;
+  final double mothlyInterestRate;
 
   /// Statement closing day
   final DateTime statementClosingDay;
@@ -25,7 +25,7 @@ class CreditLoanEntity extends Equatable {
   @override
   List<Object?> get props => [
         amountLimit,
-        interestRate,
+        mothlyInterestRate,
         statementClosingDay,
         statementPaymentDay,
       ];

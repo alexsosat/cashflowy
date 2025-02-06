@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 import '../enums/bank_card_type_enum.dart';
-import 'bank_entity.dart';
-import 'issuer_entity.dart';
+import '../bank/bank_entity.dart';
+import '../issuer/issuer_entity.dart';
 
 /// Information of a bank card
 abstract class CardDataEntity extends Equatable {

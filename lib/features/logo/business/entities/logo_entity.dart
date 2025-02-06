@@ -1,5 +1,7 @@
 import "package:equatable/equatable.dart";
 
+import "enums/logo_category_enum.dart";
+
 /// Entity that contains the data of a logo image.
 class LogoEntity extends Equatable {
   /// Entity that contains the data of a logo image.
@@ -20,7 +22,7 @@ class LogoEntity extends Equatable {
   final String? path;
 
   /// Category of the logo
-  final String category;
+  final LogoCategoryEnum category;
 
   @override
   List<Object?> get props => [
