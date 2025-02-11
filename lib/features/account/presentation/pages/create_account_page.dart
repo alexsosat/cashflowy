@@ -7,5 +7,9 @@ class CreateAccountPage extends StatelessWidget {
   const CreateAccountPage({super.key});
 
   @override
-  Widget build(BuildContext context) => const Placeholder();
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Create Account'),
+        ),
+      );
 }

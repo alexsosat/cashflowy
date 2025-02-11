@@ -104,7 +104,7 @@ class _SplashScreenContentState extends State<_SplashScreenContent>
 
   void _onPageExit() {
     context.router.replace(
-      const HomeRoute(),
+      const CreateAccountRoute(),
     );
   }
 }
