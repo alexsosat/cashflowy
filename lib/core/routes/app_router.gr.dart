@@ -21,7 +21,7 @@ import 'package:cashflowy/features/splash/presentation/pages/splash_page.dart'
 /// [_i1.CreateAccountPage]
 class CreateAccountRoute extends _i4.PageRouteInfo<void> {
   const CreateAccountRoute({List<_i4.PageRouteInfo>? children})
-    : super(CreateAccountRoute.name, initialChildren: children);
+      : super(CreateAccountRoute.name, initialChildren: children);
 
   static const String name = 'CreateAccountRoute';
 
@@ -37,7 +37,7 @@ class CreateAccountRoute extends _i4.PageRouteInfo<void> {
 /// [_i2.LogoPage]
 class LogoRoute extends _i4.PageRouteInfo<void> {
   const LogoRoute({List<_i4.PageRouteInfo>? children})
-    : super(LogoRoute.name, initialChildren: children);
+      : super(LogoRoute.name, initialChildren: children);
 
   static const String name = 'LogoRoute';
 
@@ -53,7 +53,7 @@ class LogoRoute extends _i4.PageRouteInfo<void> {
 /// [_i3.SplashPage]
 class SplashRoute extends _i4.PageRouteInfo<void> {
   const SplashRoute({List<_i4.PageRouteInfo>? children})
-    : super(SplashRoute.name, initialChildren: children);
+      : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 

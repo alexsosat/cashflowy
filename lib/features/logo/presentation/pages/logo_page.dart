@@ -6,13 +6,11 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "../cubits/logo_cubit.dart";
 
 @RoutePage()
-class LogoPage extends StatelessWidget
-{
+class LogoPage extends StatelessWidget {
   const LogoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: BlocProvider(
         create: (context) => LogoCubit(),

@@ -163,3 +163,6 @@ analyzer:
     - "**.g.dart"
   #     - '**.gen.dart'
   #     - '**/generated_plugin_registrant.dart'
+dart_code_metrics:
+  extends:
+    - recommended  
