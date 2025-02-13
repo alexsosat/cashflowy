@@ -1,7 +1,6 @@
 import "dart:isolate";
 import "dart:ui";
 
-import "package:drift/native.dart";
 import "package:flutter_notification_listener/flutter_notification_listener.dart";
 import "package:get_it/get_it.dart";
 
@@ -63,9 +62,7 @@ class NotificationListenerService {
     try {
       db = GetIt.I.get<AppDatabase>();
     } catch (e) {
-      db = AppDatabase(
-        NativeDatabase.memory(),
-      );
+      db = await constructDb();
     }
 
     final notificationRepository = NotificationRepositoryImpl(

@@ -48,9 +48,7 @@ class CubitStateMixinBuilder<T extends StateStreamable<StateMixin<B>>, B>
             case WidgetStatus.initial:
               return onInitial ?? const SizedBox.shrink();
             case WidgetStatus.loading:
-              return Center(
-                child: onLoading ?? const CircularProgressIndicator.adaptive(),
-              );
+              return onLoading ?? const CircularProgressIndicator.adaptive();
             case WidgetStatus.success:
               return onSuccess(state.data as B);
             case WidgetStatus.failure:

@@ -1,4 +1,3 @@
-import "package:drift/native.dart";
 import "package:flutter/material.dart";
 import "package:get_it/get_it.dart";
 
@@ -17,9 +16,7 @@ class DependencyInjection {
   /// Initialize the services in the application
   static Future<void> injectServices() async {
     GetIt.I.registerSingleton(
-      AppDatabase(
-        NativeDatabase.memory(),
-      ),
+      await constructDb(),
     );
 
     await NotificationListenerService.init();

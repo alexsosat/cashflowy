@@ -2548,11 +2548,6 @@ class $AppRegexTableTable extends AppRegexTable
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('CHECK ("is_purchase" IN (0, 1))'),
       defaultValue: const Constant(false));
-  static const VerificationMeta _regexMeta = const VerificationMeta('regex');
-  @override
-  late final GeneratedColumn<String> regex = GeneratedColumn<String>(
-      'regex', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _appIdMeta = const VerificationMeta('appId');
   @override
   late final GeneratedColumn<int> appId = GeneratedColumn<int>(
@@ -2562,7 +2557,7 @@ class $AppRegexTableTable extends AppRegexTable
       defaultConstraints: GeneratedColumn.constraintIsAlways(
           'REFERENCES app_notification_table (id)'));
   @override
-  List<GeneratedColumn> get $columns => [id, isPurchase, regex, appId];
+  List<GeneratedColumn> get $columns => [id, isPurchase, appId];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2581,12 +2576,6 @@ class $AppRegexTableTable extends AppRegexTable
           _isPurchaseMeta,
           isPurchase.isAcceptableOrUnknown(
               data['is_purchase']!, _isPurchaseMeta));
-    }
-    if (data.containsKey('regex')) {
-      context.handle(
-          _regexMeta, regex.isAcceptableOrUnknown(data['regex']!, _regexMeta));
-    } else if (isInserting) {
-      context.missing(_regexMeta);
     }
     if (data.containsKey('app_id')) {
       context.handle(
@@ -2607,8 +2596,6 @@ class $AppRegexTableTable extends AppRegexTable
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       isPurchase: attachedDatabase.typeMapping
           .read(DriftSqlType.bool, data['${effectivePrefix}is_purchase'])!,
-      regex: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}regex'])!,
       appId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}app_id'])!,
     );
@@ -2629,22 +2616,15 @@ class AppRegexTableData extends DataClass
   /// False if the regex is used for incomes
   final bool isPurchase;
 
-  /// Regex to get the values of the notifications belonging to the app
-  final String regex;
-
   /// Adds a reference for the app that this regex belongs to
   final int appId;
   const AppRegexTableData(
-      {required this.id,
-      required this.isPurchase,
-      required this.regex,
-      required this.appId});
+      {required this.id, required this.isPurchase, required this.appId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['is_purchase'] = Variable<bool>(isPurchase);
-    map['regex'] = Variable<String>(regex);
     map['app_id'] = Variable<int>(appId);
     return map;
   }
@@ -2653,7 +2633,6 @@ class AppRegexTableData extends DataClass
     return AppRegexTableCompanion(
       id: Value(id),
       isPurchase: Value(isPurchase),
-      regex: Value(regex),
       appId: Value(appId),
     );
   }
@@ -2664,7 +2643,6 @@ class AppRegexTableData extends DataClass
     return AppRegexTableData(
       id: serializer.fromJson<int>(json['id']),
       isPurchase: serializer.fromJson<bool>(json['isPurchase']),
-      regex: serializer.fromJson<String>(json['regex']),
       appId: serializer.fromJson<int>(json['appId']),
     );
   }
@@ -2674,17 +2652,14 @@ class AppRegexTableData extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'isPurchase': serializer.toJson<bool>(isPurchase),
-      'regex': serializer.toJson<String>(regex),
       'appId': serializer.toJson<int>(appId),
     };
   }
 
-  AppRegexTableData copyWith(
-          {int? id, bool? isPurchase, String? regex, int? appId}) =>
+  AppRegexTableData copyWith({int? id, bool? isPurchase, int? appId}) =>
       AppRegexTableData(
         id: id ?? this.id,
         isPurchase: isPurchase ?? this.isPurchase,
-        regex: regex ?? this.regex,
         appId: appId ?? this.appId,
       );
   AppRegexTableData copyWithCompanion(AppRegexTableCompanion data) {
@@ -2692,7 +2667,6 @@ class AppRegexTableData extends DataClass
       id: data.id.present ? data.id.value : this.id,
       isPurchase:
           data.isPurchase.present ? data.isPurchase.value : this.isPurchase,
-      regex: data.regex.present ? data.regex.value : this.regex,
       appId: data.appId.present ? data.appId.value : this.appId,
     );
   }
@@ -2702,65 +2676,53 @@ class AppRegexTableData extends DataClass
     return (StringBuffer('AppRegexTableData(')
           ..write('id: $id, ')
           ..write('isPurchase: $isPurchase, ')
-          ..write('regex: $regex, ')
           ..write('appId: $appId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, isPurchase, regex, appId);
+  int get hashCode => Object.hash(id, isPurchase, appId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is AppRegexTableData &&
           other.id == this.id &&
           other.isPurchase == this.isPurchase &&
-          other.regex == this.regex &&
           other.appId == this.appId);
 }
 
 class AppRegexTableCompanion extends UpdateCompanion<AppRegexTableData> {
   final Value<int> id;
   final Value<bool> isPurchase;
-  final Value<String> regex;
   final Value<int> appId;
   const AppRegexTableCompanion({
     this.id = const Value.absent(),
     this.isPurchase = const Value.absent(),
-    this.regex = const Value.absent(),
     this.appId = const Value.absent(),
   });
   AppRegexTableCompanion.insert({
     this.id = const Value.absent(),
     this.isPurchase = const Value.absent(),
-    required String regex,
     required int appId,
-  })  : regex = Value(regex),
-        appId = Value(appId);
+  }) : appId = Value(appId);
   static Insertable<AppRegexTableData> custom({
     Expression<int>? id,
     Expression<bool>? isPurchase,
-    Expression<String>? regex,
     Expression<int>? appId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (isPurchase != null) 'is_purchase': isPurchase,
-      if (regex != null) 'regex': regex,
       if (appId != null) 'app_id': appId,
     });
   }
 
   AppRegexTableCompanion copyWith(
-      {Value<int>? id,
-      Value<bool>? isPurchase,
-      Value<String>? regex,
-      Value<int>? appId}) {
+      {Value<int>? id, Value<bool>? isPurchase, Value<int>? appId}) {
     return AppRegexTableCompanion(
       id: id ?? this.id,
       isPurchase: isPurchase ?? this.isPurchase,
-      regex: regex ?? this.regex,
       appId: appId ?? this.appId,
     );
   }
@@ -2774,9 +2736,6 @@ class AppRegexTableCompanion extends UpdateCompanion<AppRegexTableData> {
     if (isPurchase.present) {
       map['is_purchase'] = Variable<bool>(isPurchase.value);
     }
-    if (regex.present) {
-      map['regex'] = Variable<String>(regex.value);
-    }
     if (appId.present) {
       map['app_id'] = Variable<int>(appId.value);
     }
@@ -2788,8 +2747,378 @@ class AppRegexTableCompanion extends UpdateCompanion<AppRegexTableData> {
     return (StringBuffer('AppRegexTableCompanion(')
           ..write('id: $id, ')
           ..write('isPurchase: $isPurchase, ')
-          ..write('regex: $regex, ')
           ..write('appId: $appId')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $RegexValuesTableTable extends RegexValuesTable
+    with TableInfo<$RegexValuesTableTable, RegexValuesTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $RegexValuesTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _titleRegexMeta =
+      const VerificationMeta('titleRegex');
+  @override
+  late final GeneratedColumn<String> titleRegex = GeneratedColumn<String>(
+      'title_regex', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _triggerTextMeta =
+      const VerificationMeta('triggerText');
+  @override
+  late final GeneratedColumn<String> triggerText = GeneratedColumn<String>(
+      'trigger_text', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _amountRegexMeta =
+      const VerificationMeta('amountRegex');
+  @override
+  late final GeneratedColumn<String> amountRegex = GeneratedColumn<String>(
+      'amount_regex', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _merchantRegexMeta =
+      const VerificationMeta('merchantRegex');
+  @override
+  late final GeneratedColumn<String> merchantRegex = GeneratedColumn<String>(
+      'merchant_regex', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _regexInfoMeta =
+      const VerificationMeta('regexInfo');
+  @override
+  late final GeneratedColumn<int> regexInfo = GeneratedColumn<int>(
+      'regex_info', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES app_regex_table (id)'));
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, titleRegex, triggerText, amountRegex, merchantRegex, regexInfo];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'regex_values_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<RegexValuesTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('title_regex')) {
+      context.handle(
+          _titleRegexMeta,
+          titleRegex.isAcceptableOrUnknown(
+              data['title_regex']!, _titleRegexMeta));
+    }
+    if (data.containsKey('trigger_text')) {
+      context.handle(
+          _triggerTextMeta,
+          triggerText.isAcceptableOrUnknown(
+              data['trigger_text']!, _triggerTextMeta));
+    }
+    if (data.containsKey('amount_regex')) {
+      context.handle(
+          _amountRegexMeta,
+          amountRegex.isAcceptableOrUnknown(
+              data['amount_regex']!, _amountRegexMeta));
+    }
+    if (data.containsKey('merchant_regex')) {
+      context.handle(
+          _merchantRegexMeta,
+          merchantRegex.isAcceptableOrUnknown(
+              data['merchant_regex']!, _merchantRegexMeta));
+    }
+    if (data.containsKey('regex_info')) {
+      context.handle(_regexInfoMeta,
+          regexInfo.isAcceptableOrUnknown(data['regex_info']!, _regexInfoMeta));
+    } else if (isInserting) {
+      context.missing(_regexInfoMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  RegexValuesTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return RegexValuesTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      titleRegex: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title_regex']),
+      triggerText: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}trigger_text']),
+      amountRegex: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}amount_regex']),
+      merchantRegex: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}merchant_regex']),
+      regexInfo: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}regex_info'])!,
+    );
+  }
+
+  @override
+  $RegexValuesTableTable createAlias(String alias) {
+    return $RegexValuesTableTable(attachedDatabase, alias);
+  }
+}
+
+class RegexValuesTableData extends DataClass
+    implements Insertable<RegexValuesTableData> {
+  /// Unique identifier for the notification
+  final int id;
+
+  /// Title for the notification
+  final String? titleRegex;
+
+  /// Trigger word for the regex search
+  final String? triggerText;
+
+  /// Regex to extract the amount from the notification
+  final String? amountRegex;
+
+  /// Regex to extract the merchant from the notification
+  final String? merchantRegex;
+
+  /// Adds a reference for the regex info that this values belongs to
+  final int regexInfo;
+  const RegexValuesTableData(
+      {required this.id,
+      this.titleRegex,
+      this.triggerText,
+      this.amountRegex,
+      this.merchantRegex,
+      required this.regexInfo});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    if (!nullToAbsent || titleRegex != null) {
+      map['title_regex'] = Variable<String>(titleRegex);
+    }
+    if (!nullToAbsent || triggerText != null) {
+      map['trigger_text'] = Variable<String>(triggerText);
+    }
+    if (!nullToAbsent || amountRegex != null) {
+      map['amount_regex'] = Variable<String>(amountRegex);
+    }
+    if (!nullToAbsent || merchantRegex != null) {
+      map['merchant_regex'] = Variable<String>(merchantRegex);
+    }
+    map['regex_info'] = Variable<int>(regexInfo);
+    return map;
+  }
+
+  RegexValuesTableCompanion toCompanion(bool nullToAbsent) {
+    return RegexValuesTableCompanion(
+      id: Value(id),
+      titleRegex: titleRegex == null && nullToAbsent
+          ? const Value.absent()
+          : Value(titleRegex),
+      triggerText: triggerText == null && nullToAbsent
+          ? const Value.absent()
+          : Value(triggerText),
+      amountRegex: amountRegex == null && nullToAbsent
+          ? const Value.absent()
+          : Value(amountRegex),
+      merchantRegex: merchantRegex == null && nullToAbsent
+          ? const Value.absent()
+          : Value(merchantRegex),
+      regexInfo: Value(regexInfo),
+    );
+  }
+
+  factory RegexValuesTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return RegexValuesTableData(
+      id: serializer.fromJson<int>(json['id']),
+      titleRegex: serializer.fromJson<String?>(json['titleRegex']),
+      triggerText: serializer.fromJson<String?>(json['triggerText']),
+      amountRegex: serializer.fromJson<String?>(json['amountRegex']),
+      merchantRegex: serializer.fromJson<String?>(json['merchantRegex']),
+      regexInfo: serializer.fromJson<int>(json['regexInfo']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'titleRegex': serializer.toJson<String?>(titleRegex),
+      'triggerText': serializer.toJson<String?>(triggerText),
+      'amountRegex': serializer.toJson<String?>(amountRegex),
+      'merchantRegex': serializer.toJson<String?>(merchantRegex),
+      'regexInfo': serializer.toJson<int>(regexInfo),
+    };
+  }
+
+  RegexValuesTableData copyWith(
+          {int? id,
+          Value<String?> titleRegex = const Value.absent(),
+          Value<String?> triggerText = const Value.absent(),
+          Value<String?> amountRegex = const Value.absent(),
+          Value<String?> merchantRegex = const Value.absent(),
+          int? regexInfo}) =>
+      RegexValuesTableData(
+        id: id ?? this.id,
+        titleRegex: titleRegex.present ? titleRegex.value : this.titleRegex,
+        triggerText: triggerText.present ? triggerText.value : this.triggerText,
+        amountRegex: amountRegex.present ? amountRegex.value : this.amountRegex,
+        merchantRegex:
+            merchantRegex.present ? merchantRegex.value : this.merchantRegex,
+        regexInfo: regexInfo ?? this.regexInfo,
+      );
+  RegexValuesTableData copyWithCompanion(RegexValuesTableCompanion data) {
+    return RegexValuesTableData(
+      id: data.id.present ? data.id.value : this.id,
+      titleRegex:
+          data.titleRegex.present ? data.titleRegex.value : this.titleRegex,
+      triggerText:
+          data.triggerText.present ? data.triggerText.value : this.triggerText,
+      amountRegex:
+          data.amountRegex.present ? data.amountRegex.value : this.amountRegex,
+      merchantRegex: data.merchantRegex.present
+          ? data.merchantRegex.value
+          : this.merchantRegex,
+      regexInfo: data.regexInfo.present ? data.regexInfo.value : this.regexInfo,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RegexValuesTableData(')
+          ..write('id: $id, ')
+          ..write('titleRegex: $titleRegex, ')
+          ..write('triggerText: $triggerText, ')
+          ..write('amountRegex: $amountRegex, ')
+          ..write('merchantRegex: $merchantRegex, ')
+          ..write('regexInfo: $regexInfo')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, titleRegex, triggerText, amountRegex, merchantRegex, regexInfo);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is RegexValuesTableData &&
+          other.id == this.id &&
+          other.titleRegex == this.titleRegex &&
+          other.triggerText == this.triggerText &&
+          other.amountRegex == this.amountRegex &&
+          other.merchantRegex == this.merchantRegex &&
+          other.regexInfo == this.regexInfo);
+}
+
+class RegexValuesTableCompanion extends UpdateCompanion<RegexValuesTableData> {
+  final Value<int> id;
+  final Value<String?> titleRegex;
+  final Value<String?> triggerText;
+  final Value<String?> amountRegex;
+  final Value<String?> merchantRegex;
+  final Value<int> regexInfo;
+  const RegexValuesTableCompanion({
+    this.id = const Value.absent(),
+    this.titleRegex = const Value.absent(),
+    this.triggerText = const Value.absent(),
+    this.amountRegex = const Value.absent(),
+    this.merchantRegex = const Value.absent(),
+    this.regexInfo = const Value.absent(),
+  });
+  RegexValuesTableCompanion.insert({
+    this.id = const Value.absent(),
+    this.titleRegex = const Value.absent(),
+    this.triggerText = const Value.absent(),
+    this.amountRegex = const Value.absent(),
+    this.merchantRegex = const Value.absent(),
+    required int regexInfo,
+  }) : regexInfo = Value(regexInfo);
+  static Insertable<RegexValuesTableData> custom({
+    Expression<int>? id,
+    Expression<String>? titleRegex,
+    Expression<String>? triggerText,
+    Expression<String>? amountRegex,
+    Expression<String>? merchantRegex,
+    Expression<int>? regexInfo,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (titleRegex != null) 'title_regex': titleRegex,
+      if (triggerText != null) 'trigger_text': triggerText,
+      if (amountRegex != null) 'amount_regex': amountRegex,
+      if (merchantRegex != null) 'merchant_regex': merchantRegex,
+      if (regexInfo != null) 'regex_info': regexInfo,
+    });
+  }
+
+  RegexValuesTableCompanion copyWith(
+      {Value<int>? id,
+      Value<String?>? titleRegex,
+      Value<String?>? triggerText,
+      Value<String?>? amountRegex,
+      Value<String?>? merchantRegex,
+      Value<int>? regexInfo}) {
+    return RegexValuesTableCompanion(
+      id: id ?? this.id,
+      titleRegex: titleRegex ?? this.titleRegex,
+      triggerText: triggerText ?? this.triggerText,
+      amountRegex: amountRegex ?? this.amountRegex,
+      merchantRegex: merchantRegex ?? this.merchantRegex,
+      regexInfo: regexInfo ?? this.regexInfo,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (titleRegex.present) {
+      map['title_regex'] = Variable<String>(titleRegex.value);
+    }
+    if (triggerText.present) {
+      map['trigger_text'] = Variable<String>(triggerText.value);
+    }
+    if (amountRegex.present) {
+      map['amount_regex'] = Variable<String>(amountRegex.value);
+    }
+    if (merchantRegex.present) {
+      map['merchant_regex'] = Variable<String>(merchantRegex.value);
+    }
+    if (regexInfo.present) {
+      map['regex_info'] = Variable<int>(regexInfo.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('RegexValuesTableCompanion(')
+          ..write('id: $id, ')
+          ..write('titleRegex: $titleRegex, ')
+          ..write('triggerText: $triggerText, ')
+          ..write('amountRegex: $amountRegex, ')
+          ..write('merchantRegex: $merchantRegex, ')
+          ..write('regexInfo: $regexInfo')
           ..write(')'))
         .toString();
   }
@@ -3297,6 +3626,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $AppNotificationTableTable appNotificationTable =
       $AppNotificationTableTable(this);
   late final $AppRegexTableTable appRegexTable = $AppRegexTableTable(this);
+  late final $RegexValuesTableTable regexValuesTable =
+      $RegexValuesTableTable(this);
   late final $NotificationTableTable notificationTable =
       $NotificationTableTable(this);
   @override
@@ -3312,6 +3643,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         transactionTable,
         appNotificationTable,
         appRegexTable,
+        regexValuesTable,
         notificationTable
       ];
 }
@@ -5105,14 +5437,12 @@ typedef $$AppRegexTableTableCreateCompanionBuilder = AppRegexTableCompanion
     Function({
   Value<int> id,
   Value<bool> isPurchase,
-  required String regex,
   required int appId,
 });
 typedef $$AppRegexTableTableUpdateCompanionBuilder = AppRegexTableCompanion
     Function({
   Value<int> id,
   Value<bool> isPurchase,
-  Value<String> regex,
   Value<int> appId,
 });
 
@@ -5135,6 +5465,23 @@ final class $$AppRegexTableTableReferences extends BaseReferences<_$AppDatabase,
     return ProcessedTableManager(
         manager.$state.copyWith(prefetchedData: [item]));
   }
+
+  static MultiTypedResultKey<$RegexValuesTableTable, List<RegexValuesTableData>>
+      _regexValuesTableRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.regexValuesTable,
+              aliasName: $_aliasNameGenerator(
+                  db.appRegexTable.id, db.regexValuesTable.regexInfo));
+
+  $$RegexValuesTableTableProcessedTableManager get regexValuesTableRefs {
+    final manager =
+        $$RegexValuesTableTableTableManager($_db, $_db.regexValuesTable)
+            .filter((f) => f.regexInfo.id($_item.id));
+
+    final cache =
+        $_typedResult.readTableOrNull(_regexValuesTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
 }
 
 class $$AppRegexTableTableFilterComposer
@@ -5147,11 +5494,6 @@ class $$AppRegexTableTableFilterComposer
 
   ColumnFilters<bool> get isPurchase => $state.composableBuilder(
       column: $state.table.isPurchase,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get regex => $state.composableBuilder(
-      column: $state.table.regex,
       builder: (column, joinBuilders) =>
           ColumnFilters(column, joinBuilders: joinBuilders));
 
@@ -5170,6 +5512,20 @@ class $$AppRegexTableTableFilterComposer
                     parentComposers)));
     return composer;
   }
+
+  ComposableFilter regexValuesTableRefs(
+      ComposableFilter Function($$RegexValuesTableTableFilterComposer f) f) {
+    final $$RegexValuesTableTableFilterComposer composer =
+        $state.composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $state.db.regexValuesTable,
+            getReferencedColumn: (t) => t.regexInfo,
+            builder: (joinBuilder, parentComposers) =>
+                $$RegexValuesTableTableFilterComposer(ComposerState($state.db,
+                    $state.db.regexValuesTable, joinBuilder, parentComposers)));
+    return f(composer);
+  }
 }
 
 class $$AppRegexTableTableOrderingComposer
@@ -5182,11 +5538,6 @@ class $$AppRegexTableTableOrderingComposer
 
   ColumnOrderings<bool> get isPurchase => $state.composableBuilder(
       column: $state.table.isPurchase,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get regex => $state.composableBuilder(
-      column: $state.table.regex,
       builder: (column, joinBuilders) =>
           ColumnOrderings(column, joinBuilders: joinBuilders));
 
@@ -5217,7 +5568,7 @@ class $$AppRegexTableTableTableManager extends RootTableManager<
     $$AppRegexTableTableUpdateCompanionBuilder,
     (AppRegexTableData, $$AppRegexTableTableReferences),
     AppRegexTableData,
-    PrefetchHooks Function({bool appId})> {
+    PrefetchHooks Function({bool appId, bool regexValuesTableRefs})> {
   $$AppRegexTableTableTableManager(_$AppDatabase db, $AppRegexTableTable table)
       : super(TableManagerState(
           db: db,
@@ -5229,25 +5580,21 @@ class $$AppRegexTableTableTableManager extends RootTableManager<
           updateCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<bool> isPurchase = const Value.absent(),
-            Value<String> regex = const Value.absent(),
             Value<int> appId = const Value.absent(),
           }) =>
               AppRegexTableCompanion(
             id: id,
             isPurchase: isPurchase,
-            regex: regex,
             appId: appId,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             Value<bool> isPurchase = const Value.absent(),
-            required String regex,
             required int appId,
           }) =>
               AppRegexTableCompanion.insert(
             id: id,
             isPurchase: isPurchase,
-            regex: regex,
             appId: appId,
           ),
           withReferenceMapper: (p0) => p0
@@ -5256,10 +5603,13 @@ class $$AppRegexTableTableTableManager extends RootTableManager<
                     $$AppRegexTableTableReferences(db, table, e)
                   ))
               .toList(),
-          prefetchHooksCallback: ({appId = false}) {
+          prefetchHooksCallback: (
+              {appId = false, regexValuesTableRefs = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [],
+              explicitlyWatchedTables: [
+                if (regexValuesTableRefs) db.regexValuesTable
+              ],
               addJoins: <
                   T extends TableManagerState<
                       dynamic,
@@ -5286,7 +5636,20 @@ class $$AppRegexTableTableTableManager extends RootTableManager<
                 return state;
               },
               getPrefetchedDataCallback: (items) async {
-                return [];
+                return [
+                  if (regexValuesTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$AppRegexTableTableReferences
+                            ._regexValuesTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$AppRegexTableTableReferences(db, table, p0)
+                                .regexValuesTableRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.regexInfo == item.id),
+                        typedResults: items)
+                ];
               },
             );
           },
@@ -5303,7 +5666,236 @@ typedef $$AppRegexTableTableProcessedTableManager = ProcessedTableManager<
     $$AppRegexTableTableUpdateCompanionBuilder,
     (AppRegexTableData, $$AppRegexTableTableReferences),
     AppRegexTableData,
-    PrefetchHooks Function({bool appId})>;
+    PrefetchHooks Function({bool appId, bool regexValuesTableRefs})>;
+typedef $$RegexValuesTableTableCreateCompanionBuilder
+    = RegexValuesTableCompanion Function({
+  Value<int> id,
+  Value<String?> titleRegex,
+  Value<String?> triggerText,
+  Value<String?> amountRegex,
+  Value<String?> merchantRegex,
+  required int regexInfo,
+});
+typedef $$RegexValuesTableTableUpdateCompanionBuilder
+    = RegexValuesTableCompanion Function({
+  Value<int> id,
+  Value<String?> titleRegex,
+  Value<String?> triggerText,
+  Value<String?> amountRegex,
+  Value<String?> merchantRegex,
+  Value<int> regexInfo,
+});
+
+final class $$RegexValuesTableTableReferences extends BaseReferences<
+    _$AppDatabase, $RegexValuesTableTable, RegexValuesTableData> {
+  $$RegexValuesTableTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $AppRegexTableTable _regexInfoTable(_$AppDatabase db) =>
+      db.appRegexTable.createAlias($_aliasNameGenerator(
+          db.regexValuesTable.regexInfo, db.appRegexTable.id));
+
+  $$AppRegexTableTableProcessedTableManager? get regexInfo {
+    if ($_item.regexInfo == null) return null;
+    final manager = $$AppRegexTableTableTableManager($_db, $_db.appRegexTable)
+        .filter((f) => f.id($_item.regexInfo!));
+    final item = $_typedResult.readTableOrNull(_regexInfoTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$RegexValuesTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $RegexValuesTableTable> {
+  $$RegexValuesTableTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get titleRegex => $state.composableBuilder(
+      column: $state.table.titleRegex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get triggerText => $state.composableBuilder(
+      column: $state.table.triggerText,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get amountRegex => $state.composableBuilder(
+      column: $state.table.amountRegex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get merchantRegex => $state.composableBuilder(
+      column: $state.table.merchantRegex,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  $$AppRegexTableTableFilterComposer get regexInfo {
+    final $$AppRegexTableTableFilterComposer composer = $state.composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.regexInfo,
+        referencedTable: $state.db.appRegexTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder, parentComposers) =>
+            $$AppRegexTableTableFilterComposer(ComposerState($state.db,
+                $state.db.appRegexTable, joinBuilder, parentComposers)));
+    return composer;
+  }
+}
+
+class $$RegexValuesTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $RegexValuesTableTable> {
+  $$RegexValuesTableTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get titleRegex => $state.composableBuilder(
+      column: $state.table.titleRegex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get triggerText => $state.composableBuilder(
+      column: $state.table.triggerText,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get amountRegex => $state.composableBuilder(
+      column: $state.table.amountRegex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get merchantRegex => $state.composableBuilder(
+      column: $state.table.merchantRegex,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  $$AppRegexTableTableOrderingComposer get regexInfo {
+    final $$AppRegexTableTableOrderingComposer composer =
+        $state.composerBuilder(
+            composer: this,
+            getCurrentColumn: (t) => t.regexInfo,
+            referencedTable: $state.db.appRegexTable,
+            getReferencedColumn: (t) => t.id,
+            builder: (joinBuilder, parentComposers) =>
+                $$AppRegexTableTableOrderingComposer(ComposerState($state.db,
+                    $state.db.appRegexTable, joinBuilder, parentComposers)));
+    return composer;
+  }
+}
+
+class $$RegexValuesTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $RegexValuesTableTable,
+    RegexValuesTableData,
+    $$RegexValuesTableTableFilterComposer,
+    $$RegexValuesTableTableOrderingComposer,
+    $$RegexValuesTableTableCreateCompanionBuilder,
+    $$RegexValuesTableTableUpdateCompanionBuilder,
+    (RegexValuesTableData, $$RegexValuesTableTableReferences),
+    RegexValuesTableData,
+    PrefetchHooks Function({bool regexInfo})> {
+  $$RegexValuesTableTableTableManager(
+      _$AppDatabase db, $RegexValuesTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$RegexValuesTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$RegexValuesTableTableOrderingComposer(ComposerState(db, table)),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String?> titleRegex = const Value.absent(),
+            Value<String?> triggerText = const Value.absent(),
+            Value<String?> amountRegex = const Value.absent(),
+            Value<String?> merchantRegex = const Value.absent(),
+            Value<int> regexInfo = const Value.absent(),
+          }) =>
+              RegexValuesTableCompanion(
+            id: id,
+            titleRegex: titleRegex,
+            triggerText: triggerText,
+            amountRegex: amountRegex,
+            merchantRegex: merchantRegex,
+            regexInfo: regexInfo,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String?> titleRegex = const Value.absent(),
+            Value<String?> triggerText = const Value.absent(),
+            Value<String?> amountRegex = const Value.absent(),
+            Value<String?> merchantRegex = const Value.absent(),
+            required int regexInfo,
+          }) =>
+              RegexValuesTableCompanion.insert(
+            id: id,
+            titleRegex: titleRegex,
+            triggerText: triggerText,
+            amountRegex: amountRegex,
+            merchantRegex: merchantRegex,
+            regexInfo: regexInfo,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$RegexValuesTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({regexInfo = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (regexInfo) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.regexInfo,
+                    referencedTable:
+                        $$RegexValuesTableTableReferences._regexInfoTable(db),
+                    referencedColumn: $$RegexValuesTableTableReferences
+                        ._regexInfoTable(db)
+                        .id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$RegexValuesTableTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $RegexValuesTableTable,
+    RegexValuesTableData,
+    $$RegexValuesTableTableFilterComposer,
+    $$RegexValuesTableTableOrderingComposer,
+    $$RegexValuesTableTableCreateCompanionBuilder,
+    $$RegexValuesTableTableUpdateCompanionBuilder,
+    (RegexValuesTableData, $$RegexValuesTableTableReferences),
+    RegexValuesTableData,
+    PrefetchHooks Function({bool regexInfo})>;
 typedef $$NotificationTableTableCreateCompanionBuilder
     = NotificationTableCompanion Function({
   Value<int> id,
@@ -5608,6 +6200,8 @@ class $AppDatabaseManager {
       $$AppNotificationTableTableTableManager(_db, _db.appNotificationTable);
   $$AppRegexTableTableTableManager get appRegexTable =>
       $$AppRegexTableTableTableManager(_db, _db.appRegexTable);
+  $$RegexValuesTableTableTableManager get regexValuesTable =>
+      $$RegexValuesTableTableTableManager(_db, _db.regexValuesTable);
   $$NotificationTableTableTableManager get notificationTable =>
       $$NotificationTableTableTableManager(_db, _db.notificationTable);
 }

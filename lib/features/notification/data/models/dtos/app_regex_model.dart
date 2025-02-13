@@ -10,7 +10,6 @@ class AppRegexModel extends AppRegexEntity {
   const AppRegexModel({
     required super.id,
     required super.isPurchase,
-    required super.regex,
   });
 
   /// Factory method to create a Home model instance from a JSON
@@ -20,6 +19,5 @@ class AppRegexModel extends AppRegexEntity {
       AppRegexModel(
         id: companion.id,
         isPurchase: companion.isPurchase,
-        regex: companion.regex,
       );
 }

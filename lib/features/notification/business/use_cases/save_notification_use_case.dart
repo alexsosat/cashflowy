@@ -28,6 +28,10 @@ class SaveNotificationUseCase implements UseCase<int?, SaveNotificationParams> {
   Future<Either<Failure, int?>> call({
     required SaveNotificationParams params,
   }) async {
+    if (params.title == null || params.description == null) {
+      return const Right(null);
+    }
+
     // Get the app by its package name
     final appsResponse = await appNotificationRepository.getAppByPackageName(
       params: ByPackageParams(package: params.appPackageName),

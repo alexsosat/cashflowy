@@ -6,7 +6,6 @@ class AppRegexEntity extends Equatable {
   const AppRegexEntity({
     required this.id,
     required this.isPurchase,
-    required this.regex,
   });
 
   /// Unique identifier for the regex
@@ -16,14 +15,10 @@ class AppRegexEntity extends Equatable {
   /// False if the regex is used for incomes
   final bool isPurchase;
 
-  /// Regex to get the values of the notifications belonging to the app
-  final String regex;
-
   @override
   List<Object?> get props => [
         id,
         isPurchase,
-        regex,
       ];
 
   @override
