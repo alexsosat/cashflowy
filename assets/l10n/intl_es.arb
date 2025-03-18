@@ -1,3 +1,14 @@
 {
-  "@@locale": "es"
+  "@@locale": "es",
+  "appDirectoryNotFound": "Ruta de directorio no encontrada",
+  "cancel": "cancelar",
+  "confirm": "confirmar",
+  "createLogoErrorTitle": "Ocurrío un error al crear el logo",
+  "loading": "cargando",
+  "logoDirectoryErrorTitle": "Ocurrió un error al obtener el directorio de logos",
+  "noInfoAvailable": "no hay información disponible",
+  "noItemsFound": "no se encontraron elementos",
+  "refreshPage": "reintentar",
+  "search": "buscar",
+  "unexpectedError": "ocurrió un error inesperado"
 }

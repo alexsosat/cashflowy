@@ -13,5 +13,9 @@ class AppRouter extends RootStackRouter {
           path: RouteNames.initial,
           page: SplashRoute.page,
         ),
+        AutoRoute(
+          path: RouteNames.createAccount,
+          page: CreateAccountRoute.page,
+        ),
       ];
 }

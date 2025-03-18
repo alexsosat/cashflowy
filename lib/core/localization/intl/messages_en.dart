@@ -20,56 +20,19 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(action, packageName) =>
-      "Are you sure you want to ${action} notifications for the ${packageName} application?";
-
-  static String m1(packageName) =>
-      "This action will delete all ${packageName} notifications.";
-
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "appList": MessageLookupByLibrary.simpleMessage("App list"),
-        "appNotificationEnableQuestion": m0,
-        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
-        "cannotGetFailureFromLeft": MessageLookupByLibrary.simpleMessage(
-            "Cannot get failure from Left"),
-        "cannotGetFailureFromRight": MessageLookupByLibrary.simpleMessage(
-            "Cannot get failure from Right"),
-        "cannotGetValueFromLeft":
-            MessageLookupByLibrary.simpleMessage("Cannot get value from Left"),
-        "cannotGetValueFromRight":
-            MessageLookupByLibrary.simpleMessage("Cannot get value from Right"),
-        "changeSaveNotificationExceptionMessage":
-            MessageLookupByLibrary.simpleMessage(
-                "An error occurred while changing the save notification value"),
-        "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
-        "deleteAppNotificationsWarningMessage": m1,
-        "deleteNotificationsExceptionMessage":
-            MessageLookupByLibrary.simpleMessage(
-                "An error occurred while deleting notifications"),
-        "disable": MessageLookupByLibrary.simpleMessage("disable"),
-        "enable": MessageLookupByLibrary.simpleMessage("enable"),
-        "enableAppNotificationsWarningMessage":
-            MessageLookupByLibrary.simpleMessage(
-                "This action will save all incoming notifications from this app."),
-        "getAppExceptionMessage": MessageLookupByLibrary.simpleMessage(
-            "An error occurred while getting the application"),
-        "getAppRegexExceptionMessage": MessageLookupByLibrary.simpleMessage(
-            "An error occurred when obtaining the regular expressions from the application"),
-        "getAppsExceptionMessage": MessageLookupByLibrary.simpleMessage(
-            "An error occurred when obtaining the applications"),
-        "getNotificationsExceptionMessage": MessageLookupByLibrary.simpleMessage(
-            "An error occurred when getting notifications from the application"),
-        "loading": MessageLookupByLibrary.simpleMessage("loading"),
-        "noAppsFound": MessageLookupByLibrary.simpleMessage("No apps found"),
-        "noInfoAvailable":
-            MessageLookupByLibrary.simpleMessage("No info available"),
-        "saveAppExceptionMessage": MessageLookupByLibrary.simpleMessage(
-            "An error occurred while saving the application"),
-        "saveNotificationExceptionMessage":
-            MessageLookupByLibrary.simpleMessage(
-                "An error occurred while saving the notification"),
-        "unexpectedError":
-            MessageLookupByLibrary.simpleMessage("unexpected error")
-      };
+    "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+    "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
+    "loading": MessageLookupByLibrary.simpleMessage("loading"),
+    "noInfoAvailable": MessageLookupByLibrary.simpleMessage(
+      "no information available",
+    ),
+    "noItemsFound": MessageLookupByLibrary.simpleMessage("no items found"),
+    "refreshPage": MessageLookupByLibrary.simpleMessage("refresh page"),
+    "search": MessageLookupByLibrary.simpleMessage("search"),
+    "unexpectedError": MessageLookupByLibrary.simpleMessage(
+      "an unexpected error occurred",
+    ),
+  };
 }

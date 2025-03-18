@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../enums/bank_card_type_enum.dart';
 import '../bank/bank_entity.dart';
+import '../enums/bank_card_type_enum.dart';
 import '../issuer/issuer_entity.dart';
 
 /// Information of a bank card

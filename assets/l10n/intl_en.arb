@@ -1,4 +1,11 @@
 {
-  "@@locale": "en"
-  
+  "@@locale": "en",
+  "cancel": "cancel",
+  "confirm": "confirm",
+  "loading": "loading",
+  "noInfoAvailable": "no information available",
+  "noItemsFound": "no items found",
+  "refreshPage": "refresh page",
+  "search": "search",
+  "unexpectedError": "an unexpected error occurred"
 }

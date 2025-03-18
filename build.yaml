@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        options:
+          store_date_time_values_as_text: true
+      flutter_gen_runner: # or flutter_gen
+        options:
+          output: lib/core/assets # Optional (default: lib/gen/)
+          line_length: 80 # Optional (default: 80)

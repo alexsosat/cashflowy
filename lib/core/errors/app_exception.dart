@@ -36,3 +36,21 @@ class EnvironmentException extends AppException {
         "Ocurrió un error con el ambiente. Por favor, intenta nuevamente.",
   });
 }
+
+/// Exception thrown when a connection to the local database fails.
+class CacheException extends AppException {
+  /// Exception thrown when a connection to the local database fails.
+  CacheException({
+    required super.message,
+    required super.title,
+  });
+}
+
+/// Exception thrown when a connection with the authentication storage fails.
+class BiometricAuthException extends AppException {
+  /// Exception thrown when a connection with the authentication storage fails.
+  BiometricAuthException({
+    required super.title,
+    required super.message,
+  });
+}

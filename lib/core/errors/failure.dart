@@ -1,4 +1,5 @@
 import "app_exception.dart";
+import "connection/http_call_exception.dart";
 
 /// The abstract class for the failures in the application
 abstract class Failure {
@@ -31,6 +32,62 @@ enum FailureLevel {
   info,
 }
 
+/// Failure for the Http calls
+class HttpCallFailure extends Failure {
+  /// Failure for the Http calls
+  HttpCallFailure({
+    required super.message,
+    required super.title,
+    required super.level,
+    required this.type,
+  });
+
+  /// Create a [HttpCallFailure] when there is no internet connection
+  factory HttpCallFailure.clientOffline() => HttpCallFailure.fromException(
+        ConnectionErrorException.clientOffline(),
+      );
+
+  /// Create a [HttpCallFailure] when the user is not authorized
+  factory HttpCallFailure.unauthorized() => HttpCallFailure.fromException(
+        ClientErrorException.unauthorized(),
+      );
+
+  /// Create a [HttpCallFailure] from a [HttpCallException]
+  factory HttpCallFailure.fromException(HttpCallException exception) =>
+      HttpCallFailure(
+        title: exception.title,
+        message: exception.message,
+        type: exception.type,
+        level: _getLevel(exception.type),
+      );
+
+  /// The type of the exception
+  final HttpExceptions type;
+
+  static FailureLevel _getLevel(HttpExceptions type) {
+    switch (type) {
+      case HttpExceptions.connectionError:
+      case HttpExceptions.clientOffline:
+        return FailureLevel.warning;
+      case HttpExceptions.serverDown:
+      case HttpExceptions.serverError:
+        return FailureLevel.error;
+      case HttpExceptions.unauthorized:
+      case HttpExceptions.expiredToken:
+        return FailureLevel.warning;
+      case HttpExceptions.clientError:
+      case HttpExceptions.badRequest:
+        return FailureLevel.warning;
+      case HttpExceptions.cancelRequest:
+      case HttpExceptions.other:
+      case HttpExceptions.badCertificate:
+        return FailureLevel.info;
+      default:
+        return FailureLevel.error;
+    }
+  }
+}
+
 /// Failure used for the application side
 class AppFailure extends Failure {
   /// Failure used for the application side
@@ -39,6 +96,22 @@ class AppFailure extends Failure {
     required super.title,
     super.level = FailureLevel.error,
   });
+
+  /// Creates an [AppFailure]
+  ///
+  /// [message] is the message of the error
+  /// [title] is the title of the error
+  ///
+  /// This is used to create a custom error
+  factory AppFailure.custom({
+    required String title,
+    required String message,
+  }) =>
+      AppFailure(
+        title: title,
+        message: message,
+        level: FailureLevel.warning,
+      );
 
   /// Create an [AppFailure]
   ///
@@ -68,9 +141,39 @@ class AppFailure extends Failure {
   /// [exception] is the exception that was thrown
   ///
   /// This is used when the error is related to cache operations
-  factory AppFailure.cacheException(DriftException exception) => AppFailure(
+  factory AppFailure.cacheException(CacheException exception) => AppFailure(
         title: exception.title,
         message: exception.message,
         level: FailureLevel.error,
+      );
+
+  /// Create an [AppFailure]
+  ///
+  /// [exception] is the exception that was thrown
+  ///
+  /// This is used when the error is related to cache operations
+  factory AppFailure.driftException(DriftException exception) => AppFailure(
+        title: exception.title,
+        message: exception.message,
+        level: FailureLevel.error,
+      );
+
+  /// Create an [AppFailure]
+  ///
+  /// This exception is used for displaying biometric errors to the user
+  factory AppFailure.biometricException(BiometricAuthException exception) =>
+      AppFailure(
+        title: exception.title,
+        message: exception.message,
+        level: FailureLevel.warning,
+      );
+
+  /// Create an [AppFailure]
+  ///
+  /// This exception is used for displaying form errors to the user
+  factory AppFailure.invalidForm(String formErrors) => AppFailure(
+        title: "Formulario inválido",
+        message: formErrors,
+        level: FailureLevel.warning,
       );
 }

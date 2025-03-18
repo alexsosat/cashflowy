@@ -18,17 +18,20 @@ class AppLocalizations {
   static AppLocalizations? _current;
 
   static AppLocalizations get current {
-    assert(_current != null,
-        'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.');
+    assert(
+      _current != null,
+      'No instance of AppLocalizations was loaded. Try to initialize the AppLocalizations delegate before accessing AppLocalizations.current.',
+    );
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<AppLocalizations> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -41,8 +44,10 @@ class AppLocalizations {
 
   static AppLocalizations of(BuildContext context) {
     final instance = AppLocalizations.maybeOf(context);
-    assert(instance != null,
-        'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of AppLocalizations present in the widget tree. Did you add AppLocalizations.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -50,31 +55,11 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Listado de aplicaciones`
-  String get appList {
+  /// `Ruta de directorio no encontrada`
+  String get appDirectoryNotFound {
     return Intl.message(
-      'Listado de aplicaciones',
-      name: 'appList',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `¿Estás seguro que deseas {action} las notificaciones para la aplicación {packageName}?`
-  String appNotificationEnableQuestion(Object action, Object packageName) {
-    return Intl.message(
-      '¿Estás seguro que deseas $action las notificaciones para la aplicación $packageName?',
-      name: 'appNotificationEnableQuestion',
-      desc: '',
-      args: [action, packageName],
-    );
-  }
-
-  /// `Notificaciones de la aplicación habilitadas`
-  String get appNotificationsEnabledMessage {
-    return Intl.message(
-      'Notificaciones de la aplicación habilitadas',
-      name: 'appNotificationsEnabledMessage',
+      'Ruta de directorio no encontrada',
+      name: 'appDirectoryNotFound',
       desc: '',
       args: [],
     );
@@ -82,189 +67,19 @@ class AppLocalizations {
 
   /// `cancelar`
   String get cancel {
-    return Intl.message(
-      'cancelar',
-      name: 'cancel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No se pudo obtener el error de Left`
-  String get cannotGetFailureFromLeft {
-    return Intl.message(
-      'No se pudo obtener el error de Left',
-      name: 'cannotGetFailureFromLeft',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No se pudo obtener el error de Right`
-  String get cannotGetFailureFromRight {
-    return Intl.message(
-      'No se pudo obtener el error de Right',
-      name: 'cannotGetFailureFromRight',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No se pudo obtener el valor de Left`
-  String get cannotGetValueFromLeft {
-    return Intl.message(
-      'No se pudo obtener el valor de Left',
-      name: 'cannotGetValueFromLeft',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No se pudo obtener el valor de Right`
-  String get cannotGetValueFromRight {
-    return Intl.message(
-      'No se pudo obtener el valor de Right',
-      name: 'cannotGetValueFromRight',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ocurrió un error al cambiar la notificación de guardado`
-  String get changeSaveNotificationExceptionMessage {
-    return Intl.message(
-      'Ocurrió un error al cambiar la notificación de guardado',
-      name: 'changeSaveNotificationExceptionMessage',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('cancelar', name: 'cancel', desc: '', args: []);
   }
 
   /// `confirmar`
   String get confirm {
-    return Intl.message(
-      'confirmar',
-      name: 'confirm',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('confirmar', name: 'confirm', desc: '', args: []);
   }
 
-  /// `Esta acción eliminará todas las notificaciones de {packageName}`
-  String deleteAppNotificationsWarningMessage(Object packageName) {
+  /// `Ocurrío un error al crear el logo`
+  String get createLogoErrorTitle {
     return Intl.message(
-      'Esta acción eliminará todas las notificaciones de $packageName',
-      name: 'deleteAppNotificationsWarningMessage',
-      desc: '',
-      args: [packageName],
-    );
-  }
-
-  /// `Se eliminaron {deletedNotifications} notificaciones`
-  String deletedNotificationsCountMessage(Object deletedNotifications) {
-    return Intl.message(
-      'Se eliminaron $deletedNotifications notificaciones',
-      name: 'deletedNotificationsCountMessage',
-      desc: '',
-      args: [deletedNotifications],
-    );
-  }
-
-  /// `Ocurrió un error al eliminar las notificaciones`
-  String get deleteNotificationsExceptionMessage {
-    return Intl.message(
-      'Ocurrió un error al eliminar las notificaciones',
-      name: 'deleteNotificationsExceptionMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `deshabilitar`
-  String get disable {
-    return Intl.message(
-      'deshabilitar',
-      name: 'disable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Deshabilitando notificaciones para la aplicación`
-  String get disablingAppNotificationsLoadingMessage {
-    return Intl.message(
-      'Deshabilitando notificaciones para la aplicación',
-      name: 'disablingAppNotificationsLoadingMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `habilitar`
-  String get enable {
-    return Intl.message(
-      'habilitar',
-      name: 'enable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Esta acción guardará todas las notificaciones provenientes de esta aplicación`
-  String get enableAppNotificationsWarningMessage {
-    return Intl.message(
-      'Esta acción guardará todas las notificaciones provenientes de esta aplicación',
-      name: 'enableAppNotificationsWarningMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Habilitando notificaciones para la aplicación`
-  String get enablingAppNotificationsLoadingMessage {
-    return Intl.message(
-      'Habilitando notificaciones para la aplicación',
-      name: 'enablingAppNotificationsLoadingMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ocurrió un error al obtener la aplicación`
-  String get getAppExceptionMessage {
-    return Intl.message(
-      'Ocurrió un error al obtener la aplicación',
-      name: 'getAppExceptionMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ocurrió un error al obtener las expresiones regulares de la aplicación`
-  String get getAppRegexExceptionMessage {
-    return Intl.message(
-      'Ocurrió un error al obtener las expresiones regulares de la aplicación',
-      name: 'getAppRegexExceptionMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ocurrió un error al obtener las aplicaciones`
-  String get getAppsExceptionMessage {
-    return Intl.message(
-      'Ocurrió un error al obtener las aplicaciones',
-      name: 'getAppsExceptionMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ocurrío un error al obtener las notificaciones de la aplicación`
-  String get getNotificationsExceptionMessage {
-    return Intl.message(
-      'Ocurrío un error al obtener las notificaciones de la aplicación',
-      name: 'getNotificationsExceptionMessage',
+      'Ocurrío un error al crear el logo',
+      name: 'createLogoErrorTitle',
       desc: '',
       args: [],
     );
@@ -272,68 +87,53 @@ class AppLocalizations {
 
   /// `cargando`
   String get loading {
+    return Intl.message('cargando', name: 'loading', desc: '', args: []);
+  }
+
+  /// `Ocurrió un error al obtener el directorio de logos`
+  String get logoDirectoryErrorTitle {
     return Intl.message(
-      'cargando',
-      name: 'loading',
+      'Ocurrió un error al obtener el directorio de logos',
+      name: 'logoDirectoryErrorTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `No se encontraron aplicaciones`
-  String get noAppsFound {
-    return Intl.message(
-      'No se encontraron aplicaciones',
-      name: 'noAppsFound',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No hay información disponible`
+  /// `no hay información disponible`
   String get noInfoAvailable {
     return Intl.message(
-      'No hay información disponible',
+      'no hay información disponible',
       name: 'noInfoAvailable',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ocurrió un error al guardar la aplicación`
-  String get saveAppExceptionMessage {
+  /// `no se encontraron elementos`
+  String get noItemsFound {
     return Intl.message(
-      'Ocurrió un error al guardar la aplicación',
-      name: 'saveAppExceptionMessage',
+      'no se encontraron elementos',
+      name: 'noItemsFound',
       desc: '',
       args: [],
     );
   }
 
-  /// `Ocurrió un error al guardar la notificación`
-  String get saveNotificationExceptionMessage {
-    return Intl.message(
-      'Ocurrió un error al guardar la notificación',
-      name: 'saveNotificationExceptionMessage',
-      desc: '',
-      args: [],
-    );
+  /// `reintentar`
+  String get refreshPage {
+    return Intl.message('reintentar', name: 'refreshPage', desc: '', args: []);
   }
 
-  /// `Operación exitosa`
-  String get successOperation {
-    return Intl.message(
-      'Operación exitosa',
-      name: 'successOperation',
-      desc: '',
-      args: [],
-    );
+  /// `buscar`
+  String get search {
+    return Intl.message('buscar', name: 'search', desc: '', args: []);
   }
 
-  /// `Ocurrió un error inesperado`
+  /// `ocurrió un error inesperado`
   String get unexpectedError {
     return Intl.message(
-      'Ocurrió un error inesperado',
+      'ocurrió un error inesperado',
       name: 'unexpectedError',
       desc: '',
       args: [],

@@ -2159,10 +2159,10 @@ class $LogoTableTable extends LogoTable
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 256),
       type: DriftSqlType.string,
       requiredDuringInsert: false);
-  static const VerificationMeta _urlMeta = const VerificationMeta('url');
+  static const VerificationMeta _domainMeta = const VerificationMeta('domain');
   @override
-  late final GeneratedColumn<String> url = GeneratedColumn<String>(
-      'url', aliasedName, false,
+  late final GeneratedColumn<String> domain = GeneratedColumn<String>(
+      'domain', aliasedName, false,
       additionalChecks:
           GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 256),
       type: DriftSqlType.string,
@@ -2174,8 +2174,15 @@ class $LogoTableTable extends LogoTable
       GeneratedColumn<int>('category', aliasedName, false,
               type: DriftSqlType.int, requiredDuringInsert: true)
           .withConverter<LogoCategoryEnum>($LogoTableTable.$convertercategory);
+  static const VerificationMeta _styleMeta = const VerificationMeta('style');
   @override
-  List<GeneratedColumn> get $columns => [id, name, path, url, category];
+  late final GeneratedColumnWithTypeConverter<LogoStyleEnum, int> style =
+      GeneratedColumn<int>('style', aliasedName, false,
+              type: DriftSqlType.int, requiredDuringInsert: true)
+          .withConverter<LogoStyleEnum>($LogoTableTable.$converterstyle);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, name, path, domain, category, style];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2199,13 +2206,14 @@ class $LogoTableTable extends LogoTable
       context.handle(
           _pathMeta, path.isAcceptableOrUnknown(data['path']!, _pathMeta));
     }
-    if (data.containsKey('url')) {
-      context.handle(
-          _urlMeta, url.isAcceptableOrUnknown(data['url']!, _urlMeta));
+    if (data.containsKey('domain')) {
+      context.handle(_domainMeta,
+          domain.isAcceptableOrUnknown(data['domain']!, _domainMeta));
     } else if (isInserting) {
-      context.missing(_urlMeta);
+      context.missing(_domainMeta);
     }
     context.handle(_categoryMeta, const VerificationResult.success());
+    context.handle(_styleMeta, const VerificationResult.success());
     return context;
   }
 
@@ -2221,11 +2229,14 @@ class $LogoTableTable extends LogoTable
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       path: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}path']),
-      url: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}url'])!,
+      domain: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}domain'])!,
       category: $LogoTableTable.$convertercategory.fromSql(attachedDatabase
           .typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}category'])!),
+      style: $LogoTableTable.$converterstyle.fromSql(attachedDatabase
+          .typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}style'])!),
     );
   }
 
@@ -2236,6 +2247,8 @@ class $LogoTableTable extends LogoTable
 
   static JsonTypeConverter2<LogoCategoryEnum, int, int> $convertercategory =
       const EnumIndexConverter<LogoCategoryEnum>(LogoCategoryEnum.values);
+  static JsonTypeConverter2<LogoStyleEnum, int, int> $converterstyle =
+      const EnumIndexConverter<LogoStyleEnum>(LogoStyleEnum.values);
 }
 
 class LogoTableData extends DataClass implements Insertable<LogoTableData> {
@@ -2249,16 +2262,20 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
   final String? path;
 
   /// Url of the logo
-  final String url;
+  final String domain;
 
   /// Category of the logo
   final LogoCategoryEnum category;
+
+  /// Style of the logo
+  final LogoStyleEnum style;
   const LogoTableData(
       {required this.id,
       required this.name,
       this.path,
-      required this.url,
-      required this.category});
+      required this.domain,
+      required this.category,
+      required this.style});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2267,10 +2284,14 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
     if (!nullToAbsent || path != null) {
       map['path'] = Variable<String>(path);
     }
-    map['url'] = Variable<String>(url);
+    map['domain'] = Variable<String>(domain);
     {
       map['category'] =
           Variable<int>($LogoTableTable.$convertercategory.toSql(category));
+    }
+    {
+      map['style'] =
+          Variable<int>($LogoTableTable.$converterstyle.toSql(style));
     }
     return map;
   }
@@ -2280,8 +2301,9 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
       id: Value(id),
       name: Value(name),
       path: path == null && nullToAbsent ? const Value.absent() : Value(path),
-      url: Value(url),
+      domain: Value(domain),
       category: Value(category),
+      style: Value(style),
     );
   }
 
@@ -2292,9 +2314,11 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       path: serializer.fromJson<String?>(json['path']),
-      url: serializer.fromJson<String>(json['url']),
+      domain: serializer.fromJson<String>(json['domain']),
       category: $LogoTableTable.$convertercategory
           .fromJson(serializer.fromJson<int>(json['category'])),
+      style: $LogoTableTable.$converterstyle
+          .fromJson(serializer.fromJson<int>(json['style'])),
     );
   }
   @override
@@ -2304,9 +2328,11 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'path': serializer.toJson<String?>(path),
-      'url': serializer.toJson<String>(url),
+      'domain': serializer.toJson<String>(domain),
       'category': serializer
           .toJson<int>($LogoTableTable.$convertercategory.toJson(category)),
+      'style':
+          serializer.toJson<int>($LogoTableTable.$converterstyle.toJson(style)),
     };
   }
 
@@ -2314,22 +2340,25 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
           {int? id,
           String? name,
           Value<String?> path = const Value.absent(),
-          String? url,
-          LogoCategoryEnum? category}) =>
+          String? domain,
+          LogoCategoryEnum? category,
+          LogoStyleEnum? style}) =>
       LogoTableData(
         id: id ?? this.id,
         name: name ?? this.name,
         path: path.present ? path.value : this.path,
-        url: url ?? this.url,
+        domain: domain ?? this.domain,
         category: category ?? this.category,
+        style: style ?? this.style,
       );
   LogoTableData copyWithCompanion(LogoTableCompanion data) {
     return LogoTableData(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       path: data.path.present ? data.path.value : this.path,
-      url: data.url.present ? data.url.value : this.url,
+      domain: data.domain.present ? data.domain.value : this.domain,
       category: data.category.present ? data.category.value : this.category,
+      style: data.style.present ? data.style.value : this.style,
     );
   }
 
@@ -2339,14 +2368,15 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('path: $path, ')
-          ..write('url: $url, ')
-          ..write('category: $category')
+          ..write('domain: $domain, ')
+          ..write('category: $category, ')
+          ..write('style: $style')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, name, path, url, category);
+  int get hashCode => Object.hash(id, name, path, domain, category, style);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2354,45 +2384,52 @@ class LogoTableData extends DataClass implements Insertable<LogoTableData> {
           other.id == this.id &&
           other.name == this.name &&
           other.path == this.path &&
-          other.url == this.url &&
-          other.category == this.category);
+          other.domain == this.domain &&
+          other.category == this.category &&
+          other.style == this.style);
 }
 
 class LogoTableCompanion extends UpdateCompanion<LogoTableData> {
   final Value<int> id;
   final Value<String> name;
   final Value<String?> path;
-  final Value<String> url;
+  final Value<String> domain;
   final Value<LogoCategoryEnum> category;
+  final Value<LogoStyleEnum> style;
   const LogoTableCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.path = const Value.absent(),
-    this.url = const Value.absent(),
+    this.domain = const Value.absent(),
     this.category = const Value.absent(),
+    this.style = const Value.absent(),
   });
   LogoTableCompanion.insert({
     this.id = const Value.absent(),
     required String name,
     this.path = const Value.absent(),
-    required String url,
+    required String domain,
     required LogoCategoryEnum category,
+    required LogoStyleEnum style,
   })  : name = Value(name),
-        url = Value(url),
-        category = Value(category);
+        domain = Value(domain),
+        category = Value(category),
+        style = Value(style);
   static Insertable<LogoTableData> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<String>? path,
-    Expression<String>? url,
+    Expression<String>? domain,
     Expression<int>? category,
+    Expression<int>? style,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (path != null) 'path': path,
-      if (url != null) 'url': url,
+      if (domain != null) 'domain': domain,
       if (category != null) 'category': category,
+      if (style != null) 'style': style,
     });
   }
 
@@ -2400,14 +2437,16 @@ class LogoTableCompanion extends UpdateCompanion<LogoTableData> {
       {Value<int>? id,
       Value<String>? name,
       Value<String?>? path,
-      Value<String>? url,
-      Value<LogoCategoryEnum>? category}) {
+      Value<String>? domain,
+      Value<LogoCategoryEnum>? category,
+      Value<LogoStyleEnum>? style}) {
     return LogoTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
       path: path ?? this.path,
-      url: url ?? this.url,
+      domain: domain ?? this.domain,
       category: category ?? this.category,
+      style: style ?? this.style,
     );
   }
 
@@ -2423,12 +2462,16 @@ class LogoTableCompanion extends UpdateCompanion<LogoTableData> {
     if (path.present) {
       map['path'] = Variable<String>(path.value);
     }
-    if (url.present) {
-      map['url'] = Variable<String>(url.value);
+    if (domain.present) {
+      map['domain'] = Variable<String>(domain.value);
     }
     if (category.present) {
       map['category'] = Variable<int>(
           $LogoTableTable.$convertercategory.toSql(category.value));
+    }
+    if (style.present) {
+      map['style'] =
+          Variable<int>($LogoTableTable.$converterstyle.toSql(style.value));
     }
     return map;
   }
@@ -2439,8 +2482,9 @@ class LogoTableCompanion extends UpdateCompanion<LogoTableData> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('path: $path, ')
-          ..write('url: $url, ')
-          ..write('category: $category')
+          ..write('domain: $domain, ')
+          ..write('category: $category, ')
+          ..write('style: $style')
           ..write(')'))
         .toString();
   }
@@ -2884,6 +2928,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         issuerLogoRel,
         bankLogoRel
       ];
+  @override
+  DriftDatabaseOptions get options =>
+      const DriftDatabaseOptions(storeDateTimeAsText: true);
 }
 
 typedef $$AccountTableTableCreateCompanionBuilder = AccountTableCompanion
@@ -5680,15 +5727,17 @@ typedef $$LogoTableTableCreateCompanionBuilder = LogoTableCompanion Function({
   Value<int> id,
   required String name,
   Value<String?> path,
-  required String url,
+  required String domain,
   required LogoCategoryEnum category,
+  required LogoStyleEnum style,
 });
 typedef $$LogoTableTableUpdateCompanionBuilder = LogoTableCompanion Function({
   Value<int> id,
   Value<String> name,
   Value<String?> path,
-  Value<String> url,
+  Value<String> domain,
   Value<LogoCategoryEnum> category,
+  Value<LogoStyleEnum> style,
 });
 
 final class $$LogoTableTableReferences
@@ -5744,12 +5793,17 @@ class $$LogoTableTableFilterComposer
   ColumnFilters<String> get path => $composableBuilder(
       column: $table.path, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get url => $composableBuilder(
-      column: $table.url, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get domain => $composableBuilder(
+      column: $table.domain, builder: (column) => ColumnFilters(column));
 
   ColumnWithTypeConverterFilters<LogoCategoryEnum, LogoCategoryEnum, int>
       get category => $composableBuilder(
           column: $table.category,
+          builder: (column) => ColumnWithTypeConverterFilters(column));
+
+  ColumnWithTypeConverterFilters<LogoStyleEnum, LogoStyleEnum, int> get style =>
+      $composableBuilder(
+          column: $table.style,
           builder: (column) => ColumnWithTypeConverterFilters(column));
 
   Expression<bool> issuerLogoRelRefs(
@@ -5813,11 +5867,14 @@ class $$LogoTableTableOrderingComposer
   ColumnOrderings<String> get path => $composableBuilder(
       column: $table.path, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get url => $composableBuilder(
-      column: $table.url, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get domain => $composableBuilder(
+      column: $table.domain, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get category => $composableBuilder(
       column: $table.category, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get style => $composableBuilder(
+      column: $table.style, builder: (column) => ColumnOrderings(column));
 }
 
 class $$LogoTableTableAnnotationComposer
@@ -5838,11 +5895,14 @@ class $$LogoTableTableAnnotationComposer
   GeneratedColumn<String> get path =>
       $composableBuilder(column: $table.path, builder: (column) => column);
 
-  GeneratedColumn<String> get url =>
-      $composableBuilder(column: $table.url, builder: (column) => column);
+  GeneratedColumn<String> get domain =>
+      $composableBuilder(column: $table.domain, builder: (column) => column);
 
   GeneratedColumnWithTypeConverter<LogoCategoryEnum, int> get category =>
       $composableBuilder(column: $table.category, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<LogoStyleEnum, int> get style =>
+      $composableBuilder(column: $table.style, builder: (column) => column);
 
   Expression<T> issuerLogoRelRefs<T extends Object>(
       Expression<T> Function($$IssuerLogoRelTableAnnotationComposer a) f) {
@@ -5913,29 +5973,33 @@ class $$LogoTableTableTableManager extends RootTableManager<
             Value<int> id = const Value.absent(),
             Value<String> name = const Value.absent(),
             Value<String?> path = const Value.absent(),
-            Value<String> url = const Value.absent(),
+            Value<String> domain = const Value.absent(),
             Value<LogoCategoryEnum> category = const Value.absent(),
+            Value<LogoStyleEnum> style = const Value.absent(),
           }) =>
               LogoTableCompanion(
             id: id,
             name: name,
             path: path,
-            url: url,
+            domain: domain,
             category: category,
+            style: style,
           ),
           createCompanionCallback: ({
             Value<int> id = const Value.absent(),
             required String name,
             Value<String?> path = const Value.absent(),
-            required String url,
+            required String domain,
             required LogoCategoryEnum category,
+            required LogoStyleEnum style,
           }) =>
               LogoTableCompanion.insert(
             id: id,
             name: name,
             path: path,
-            url: url,
+            domain: domain,
             category: category,
+            style: style,
           ),
           withReferenceMapper: (p0) => p0
               .map((e) => (

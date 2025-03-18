@@ -1,3 +1,5 @@
+import "dart:io";
+
 import "package:drift/native.dart";
 import "package:flutter/material.dart";
 import "package:get_it/get_it.dart";
@@ -21,7 +23,9 @@ class DependencyInjection {
       ),
     );
 
-    await NotificationListenerService.init();
+    if (Platform.isAndroid) {
+      await NotificationListenerService.init();
+    }
 
     await LocalNotificationsService().initLocalNotificationsService();
   }

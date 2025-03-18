@@ -7,9 +7,9 @@ import "../entities/account_entity.dart";
 import "../repositories/account_repository.dart";
 
 /// Use case to get the account data
-class GetAccount implements UseCase<AccountEntity, AccountParams> {
+class GetAccountUseCase extends UseCase<AccountEntity, AccountParams> {
   /// Use case to get the account data
-  GetAccount({
+  GetAccountUseCase({
     required this.accountRepository,
   });
 
@@ -17,7 +17,7 @@ class GetAccount implements UseCase<AccountEntity, AccountParams> {
   final AccountRepository accountRepository;
 
   @override
-  Future<Either<Failure, AccountEntity>> call({
+  Either<Failure, AccountEntity> call({
     required AccountParams params,
   }) {
     // TODO: implement call

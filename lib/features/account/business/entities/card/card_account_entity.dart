@@ -1,5 +1,5 @@
-import '../enums/account_type_enum.dart';
 import '../account_entity.dart';
+import '../enums/account_type_enum.dart';
 import 'card_data_entity.dart';
 
 /// Entity that contains the data of an account related to a bank card

@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
 
-import '../../../../business/entities/enums/logo_category_enum.dart';
+import '../../../../business/entities/enums/enums.dart';
 
 /// This is the table where the logo information will be stored
 class LogoTable extends Table {
@@ -14,8 +14,11 @@ class LogoTable extends Table {
   late final path = text().withLength(min: 1, max: 256).nullable()();
 
   /// Url of the logo
-  late final url = text().withLength(min: 1, max: 256)();
+  late final domain = text().withLength(min: 1, max: 256)();
 
   /// Category of the logo
   late final category = intEnum<LogoCategoryEnum>()();
+
+  /// Style of the logo
+  late final style = intEnum<LogoStyleEnum>()();
 }
