@@ -1,6 +1,6 @@
 import "dart:io";
 
-import "package:fpdart/src/either.dart";
+import "package:fpdart/fpdart.dart";
 
 import "../../../../core/errors/error_handler.dart";
 import "../../../../core/errors/failure.dart";
@@ -15,6 +15,7 @@ class FilesystemRepositoryImpl implements FilesystemRepository {
     required this.localDataSource,
   });
 
+  /// Local data source to make the request
   final FilesystemLocalDataSource localDataSource;
 
   @override

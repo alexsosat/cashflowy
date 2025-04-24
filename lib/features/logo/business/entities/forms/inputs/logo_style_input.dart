@@ -9,13 +9,13 @@ import '../../enums/logo_style_enum.dart';
 class LogoStyleInput extends InputEntity<LogoStyleEnum?> {
   const LogoStyleInput.pure({
     required super.field,
-    required super.validators,
+    super.validators,
   }) : super.pure(value: null);
 
   const LogoStyleInput.dirty({
     required super.field,
     required super.value,
-    required super.validators,
+    super.validators,
   }) : super.dirty();
 
   @override

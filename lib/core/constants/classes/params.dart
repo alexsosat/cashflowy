@@ -1,8 +1,10 @@
 /// Base class for all params classes
-abstract class Params {
+abstract class Params<T> {
   /// Base class for all params classes
   const Params();
 
   /// Converts the params to a map
-  Map<String, dynamic> toMap() => {};
+  T toCompanion() {
+    throw UnimplementedError();
+  }
 }

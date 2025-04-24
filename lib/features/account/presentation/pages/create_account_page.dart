@@ -11,5 +11,9 @@ class CreateAccountPage extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Create Account'),
         ),
+        body: SingleChildScrollView(
+          padding: AppSeparators.pagePadding,
+          child: const CreateAccountForm(),
+        ),
       );
 }

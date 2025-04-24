@@ -35,7 +35,6 @@ class CreateLogoUseCase extends UseCaseAsync<bool, CreateLogoParams> {
       );
     }
 
-    // TODO: Download the image and save it to the local storage
     final downloadResponse = await DownloadLogoUseCase(
       logoRepository: logoRepository,
       fyleSystemRepository: fyleSystemRepository,

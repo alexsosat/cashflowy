@@ -1,8 +1,12 @@
+import 'package:drift/drift.dart';
+
+import '../../../../../core/constants/classes/mock_data.dart';
 import '../../../../../core/constants/classes/params.dart';
+import '../../../business/entities/enums/enums.dart';
 import '../../../business/entities/forms/create_logo_form_entity.dart';
 
 /// Parameters to create a new logo
-class CreateLogoParams extends Params {
+class CreateLogoParams extends Params<LogoTableCompanion> {
   /// Parameters to create a new logo
   CreateLogoParams({
     required this.form,
@@ -16,11 +20,11 @@ class CreateLogoParams extends Params {
   final String path;
 
   @override
-  Map<String, dynamic> toMap() => {
-        'name': form.nameInput.value,
-        'domain': form.domainInput.value,
-        'category': form.categoryInput.value,
-        'style': form.styleInput.value,
-        'path': path,
-      };
+  LogoTableCompanion toCompanion() => LogoTableCompanion(
+        name: Value(form.nameInput.value ?? ""),
+        domain: Value(form.domainInput.value ?? ""),
+        category: Value(form.categoryInput.value ?? LogoCategoryEnum.MERCHANT),
+        style: Value(form.styleInput.value ?? LogoStyleEnum.ICON),
+        path: Value(path),
+      );
 }

@@ -1,8 +1,10 @@
+// ignore_for_file: unnecessary_import
+
 import "package:drift/drift.dart";
 
 import "../../../features/account/business/entities/enums/account_type_enum.dart";
 import "../../../features/account/business/entities/enums/bank_card_type_enum.dart";
-import "../../../features/account/data/data_sources/local/tables/account_card_rel.dart";
+import "../../../features/account/data/data_sources/local/tables/account_card_rel_table.dart";
 import "../../../features/account/data/data_sources/local/tables/account_table.dart";
 import "../../../features/account/data/data_sources/local/tables/bank/bank_logo_rel.dart";
 import "../../../features/account/data/data_sources/local/tables/bank/bank_table.dart";
@@ -13,7 +15,7 @@ import "../../../features/account/data/data_sources/local/tables/card_table/card
 import "../../../features/account/data/data_sources/local/tables/card_table/credit_loan_table.dart";
 import "../../../features/account/data/data_sources/local/tables/issuer/issuer_logo_rel.dart";
 import "../../../features/account/data/data_sources/local/tables/issuer/issuer_table.dart";
-import "../../../features/logo/business/entities/enums/logo_category_enum.dart";
+import "../../../features/logo/business/entities/enums/enums.dart";
 import "../../../features/logo/data/data_sources/local/tables/logo_table.dart";
 
 part "app_database.g.dart";

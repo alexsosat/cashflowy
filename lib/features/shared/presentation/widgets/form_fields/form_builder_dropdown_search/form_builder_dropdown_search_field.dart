@@ -2,8 +2,8 @@ import "dart:async";
 
 import "package:dropdown_search/dropdown_search.dart";
 import "package:flutter/material.dart";
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:fpdart/fpdart.dart";
-import "package:hugeicons/hugeicons.dart";
 
 import "../../../../../../core/errors/failure.dart";
 import "../../../../../../core/extensions/string_extension.dart";
@@ -33,6 +33,7 @@ class FormBuilderDropdownSearchField<T> extends StatelessWidget {
     this.clearButtonVisible = true,
     this.showSearchBox = true,
     this.enabled = true,
+    this.containerBuilder,
     super.key,
   });
 
@@ -89,16 +90,19 @@ class FormBuilderDropdownSearchField<T> extends StatelessWidget {
   /// Message to be displayed for programmatic errors
   final String? errorText;
 
+  /// Container builder for the bottom sheet
+  final Widget Function(BuildContext context, Widget child)? containerBuilder;
+
   @override
-  Widget build(BuildContext context) => FormBuilderSearchableDropdown<T>(
+  Widget build(BuildContext context) => FormBuilderDropdownSearch<T>(
         bottomSheetKey: bottomSheetKey,
         name: name,
         enabled: enabled,
         items: _getItems,
         clearButtonProps: ClearButtonProps(
           isVisible: clearButtonVisible,
-          icon: HugeIcon(
-            icon: HugeIcons.strokeRoundedDelete01,
+          icon: FaIcon(
+            FontAwesomeIcons.trash,
             color: context.colorScheme.outlineVariant,
           ),
         ),
@@ -135,6 +139,7 @@ class FormBuilderDropdownSearchField<T> extends StatelessWidget {
               ),
             ),
           ),
+          containerBuilder: containerBuilder,
         ),
         onChanged: onChanged,
         decoration: InputDecoration(

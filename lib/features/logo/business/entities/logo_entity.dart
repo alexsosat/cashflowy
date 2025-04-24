@@ -7,12 +7,16 @@ import "enums/logo_style_enum.dart";
 class LogoEntity extends Equatable {
   /// Entity that contains the data of a logo image.
   const LogoEntity({
+    required this.id,
     required this.name,
     required this.domain,
     required this.category,
     required this.style,
     this.path,
   });
+
+  /// Unique identifier of the logo
+  final int id;
 
   /// Name of the logo
   final String name;
@@ -31,12 +35,17 @@ class LogoEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         name,
         domain,
+        style,
         path,
         category,
       ];
 
   @override
   bool get stringify => true;
+
+  /// True if the logo contains [query] on its name.
+  bool lookup(String query) => name.toLowerCase().contains(query.toLowerCase());
 }

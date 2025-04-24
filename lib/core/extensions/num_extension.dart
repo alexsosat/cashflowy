@@ -7,17 +7,19 @@ extension NumExtension on num {
 
   /// Converts a number to a currency string
   /// Example: 1000.0.toCurrencyString() -> $ 1,000.00
-  String toCurrencyString() {
-    final formatter = NumberFormat.simpleCurrency(
+  String toCurrencyString({
+    String symbol = r"$ ",
+    int decimalDigits = 2,
+  }) {
+    final formatter = NumberFormat.currency(
       locale: "es_MX",
-      decimalDigits: 2,
+      symbol: symbol,
+      decimalDigits: decimalDigits,
     );
 
     final String textFormated = formatter.format(this);
 
-    final String newString = textFormated.replaceAll(RegExp(r"\$"), r"$ ");
-
-    return newString;
+    return textFormated;
   }
 
   /// Returns true if the number is between the given range.

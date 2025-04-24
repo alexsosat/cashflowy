@@ -55,4 +55,10 @@ class AppSeparators {
   static const Widget hLarge = SizedBox(
     width: 40,
   );
+
+  /// Page default padding
+  static EdgeInsets pagePadding = const EdgeInsets.symmetric(
+    horizontal: 20,
+    vertical: 40,
+  );
 }

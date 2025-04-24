@@ -22,9 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "appDirectoryNotFound": MessageLookupByLibrary.simpleMessage(
+      "Directory path not found",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
     "confirm": MessageLookupByLibrary.simpleMessage("confirm"),
+    "createLogoErrorTitle": MessageLookupByLibrary.simpleMessage(
+      "An error occurred while creating the logo",
+    ),
     "loading": MessageLookupByLibrary.simpleMessage("loading"),
+    "logoDirectoryErrorTitle": MessageLookupByLibrary.simpleMessage(
+      "An error occurred while obtaining the logo directory.",
+    ),
+    "logoSelect": MessageLookupByLibrary.simpleMessage("select a logo"),
+    "logosRetrieveAllError": MessageLookupByLibrary.simpleMessage(
+      "Error retrieving logos",
+    ),
     "noInfoAvailable": MessageLookupByLibrary.simpleMessage(
       "no information available",
     ),

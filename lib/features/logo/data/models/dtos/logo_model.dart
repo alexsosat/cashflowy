@@ -1,7 +1,4 @@
-import "package:drift/drift.dart";
-
 import "../../../../../core/constants/classes/mock_data.dart";
-import "../../../business/entities/enums/enums.dart";
 import "../../../business/entities/logo_entity.dart";
 
 /// Model that transforms the Logo data from the API to the
@@ -10,6 +7,7 @@ class LogoModel extends LogoEntity {
   /// Model that transforms the Logo data from the API to the
   /// application entity
   const LogoModel({
+    required super.id,
     required super.name,
     required super.domain,
     required super.category,
@@ -17,21 +15,13 @@ class LogoModel extends LogoEntity {
     super.path,
   });
 
-  /// Constructor that creates a [LogoModel] from a map
-  factory LogoModel.fromMap(Map<String, dynamic> map) => LogoModel(
-        name: map["name"] as String,
-        domain: map["domain"] as String,
-        category: map["category"] as LogoCategoryEnum,
-        style: map["style"] as LogoStyleEnum,
-        path: map["path"] as String?,
-      );
-
-  /// Create a [LogoTableCompanion] from this model
-  LogoTableCompanion toCompanion() => LogoTableCompanion(
-        name: Value(name),
-        domain: Value(domain),
-        category: Value(category),
-        style: Value(style),
-        path: Value(path),
+  /// Constructor that creates a [LogoModel] from a [LogoTableData]
+  factory LogoModel.fromTable(LogoTableData data) => LogoModel(
+        id: data.id,
+        name: data.name,
+        domain: data.domain,
+        category: data.category,
+        style: data.style,
+        path: data.path,
       );
 }

@@ -42,11 +42,17 @@ extension StringExtension on String {
   }
 
   /// Converts the string to a currency format string
-  String toCurrencyFormat() {
+  String toCurrencyFormat({
+    String symbol = "",
+    int decimalDigits = 2,
+  }) {
     try {
       final double value = double.parse(this);
 
-      return value.toCurrencyString();
+      return value.toCurrencyString(
+        symbol: symbol,
+        decimalDigits: decimalDigits,
+      );
     } catch (e) {
       return this;
     }

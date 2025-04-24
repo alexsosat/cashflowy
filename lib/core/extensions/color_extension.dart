@@ -8,12 +8,7 @@ extension ColorExtension on Color {
   ///
   /// String is in the format "aabbcc"
   /// or "ffaabbcc" with an optional leading "#".
-  static Color? fromHex(String? hexString) {
-    if (hexString == null) return null;
-    if (hexString.isEmpty) return null;
-    if (hexString.length < 6) return null;
-    if (hexString.length > 9) return null;
-
+  static Color fromHex(String hexString) {
     final StringBuffer buffer = StringBuffer();
     if (hexString.length == 6 || hexString.length == 7) {
       buffer.write("ff");
@@ -26,12 +21,17 @@ extension ColorExtension on Color {
   /// Returns a String representation of the color in hexadecimal format.
   /// [leadingHashSign] adds a leading hash sign to the string.
   /// [alphaRadix] includes the alpha channel in the string.
-  String toHex({bool leadingHashSign = true, bool alphaRadix = true}) =>
-      '${leadingHashSign ? '#' : ''}'
-      '${alphaRadix ? alpha.toRadixString(16).padLeft(2, '0') : ''}'
-      '${red.toRadixString(16).padLeft(2, '0')}'
-      '${green.toRadixString(16).padLeft(2, '0')}'
-      '${blue.toRadixString(16).padLeft(2, '0')}';
+  String toHex({bool hashSign = false, bool withAlpha = false}) {
+    final alpha = (a * 255).toInt().toRadixString(16).padLeft(2, "0");
+    final red = (r * 255).toInt().toRadixString(16).padLeft(2, "0");
+    final green = (g * 255).toInt().toRadixString(16).padLeft(2, "0");
+    final blue = (b * 255).toInt().toRadixString(16).padLeft(2, "0");
+
+    return "${hashSign ? '#' : ''}"
+            "${withAlpha ? alpha : ''}"
+            "$red$green$blue"
+        .toUpperCase();
+  }
 
   /// Darkens the color with the given integer percentage amount.
   /// Defaults to 10%.
@@ -60,10 +60,10 @@ extension ColorExtension on Color {
     }
     final int operations = (255 * -(amount / 100)).round();
     final Color color = Color.fromARGB(
-      alpha,
-      math.max(0, math.min(255, red - operations)),
-      math.max(0, math.min(255, green - operations)),
-      math.max(0, math.min(255, blue - operations)),
+      (a * 255).toInt(),
+      math.max(0, math.min(255, (r * 255).toInt() - operations)),
+      math.max(0, math.min(255, (g * 255).toInt() - operations)),
+      math.max(0, math.min(255, (b * 255).toInt() - operations)),
     );
 
     return color;

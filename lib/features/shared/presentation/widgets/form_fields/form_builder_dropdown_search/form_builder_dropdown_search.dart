@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 /// Field for selecting value(s) from a searchable list
-class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
+class FormBuilderDropdownSearch<T> extends FormBuilderFieldDecoration<T> {
   /// Creates field for selecting value(s) from a searchable list
-  FormBuilderSearchableDropdown({
+  FormBuilderDropdownSearch({
     required super.name,
     required this.items,
     super.key,
@@ -163,7 +163,6 @@ class FormBuilderSearchableDropdown<T> extends FormBuilderFieldDecoration<T> {
       FormBuilderSearchableDropdownState<T>();
 }
 
-/// State for [FormBuilderSearchableDropdown]
+/// State for [FormBuilderDropdownSearch]
 class FormBuilderSearchableDropdownState<T>
-    extends FormBuilderFieldDecorationState<FormBuilderSearchableDropdown<T>,
-        T> {}
+    extends FormBuilderFieldDecorationState<FormBuilderDropdownSearch<T>, T> {}

@@ -3,9 +3,9 @@ import '../enums/account_type_enum.dart';
 import 'card_data_entity.dart';
 
 /// Entity that contains the data of an account related to a bank card
-class CashAccountEntity extends AccountEntity {
+class CardAccountEntity extends AccountEntity {
   /// Entity that contains the data of an account related to a bank card
-  const CashAccountEntity({
+  const CardAccountEntity({
     required super.id,
     required super.name,
     required super.currency,

@@ -55,6 +55,16 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
+  /// `selecciona un tipo de cuenta`
+  String get accountTypeSelect {
+    return Intl.message(
+      'selecciona un tipo de cuenta',
+      name: 'accountTypeSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ruta de directorio no encontrada`
   String get appDirectoryNotFound {
     return Intl.message(
@@ -65,9 +75,29 @@ class AppLocalizations {
     );
   }
 
+  /// `selecciona el tipo de tarjeta`
+  String get bankCardTypeSelect {
+    return Intl.message(
+      'selecciona el tipo de tarjeta',
+      name: 'bankCardTypeSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `cancelar`
   String get cancel {
     return Intl.message('cancelar', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `selecciona un color`
+  String get colorSelect {
+    return Intl.message(
+      'selecciona un color',
+      name: 'colorSelect',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `confirmar`
@@ -80,6 +110,26 @@ class AppLocalizations {
     return Intl.message(
       'Ocurrío un error al crear el logo',
       name: 'createLogoErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Límite de crédito`
+  String get creditCardAmountLimit {
+    return Intl.message(
+      'Límite de crédito',
+      name: 'creditCardAmountLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `selecciona una moneda`
+  String get currencySelect {
+    return Intl.message(
+      'selecciona una moneda',
+      name: 'currencySelect',
       desc: '',
       args: [],
     );
@@ -98,6 +148,31 @@ class AppLocalizations {
       desc: '',
       args: [],
     );
+  }
+
+  /// `selecciona un logo`
+  String get logoSelect {
+    return Intl.message(
+      'selecciona un logo',
+      name: 'logoSelect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error al obtener los logos`
+  String get logosRetrieveAllError {
+    return Intl.message(
+      'Error al obtener los logos',
+      name: 'logosRetrieveAllError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `nombre`
+  String get name {
+    return Intl.message('nombre', name: 'name', desc: '', args: []);
   }
 
   /// `no hay información disponible`

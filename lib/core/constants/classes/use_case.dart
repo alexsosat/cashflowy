@@ -1,3 +1,5 @@
+// ignore_for_file: prefer-match-file-name
+
 import "package:fpdart/fpdart.dart";
 
 import "../../errors/failure.dart";

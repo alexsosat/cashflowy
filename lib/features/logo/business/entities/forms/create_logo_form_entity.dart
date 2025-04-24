@@ -9,7 +9,7 @@ import 'inputs/inputs.dart';
 /// Form inputs to create a logo
 class CreateLogoFormEntity extends FormEntity {
   /// Form inputs to create a logo
-  const CreateLogoFormEntity({
+  CreateLogoFormEntity({
     this.nameInput = const StringInput.pure(
       field: "name",
       validators: [
@@ -30,22 +30,22 @@ class CreateLogoFormEntity extends FormEntity {
     this.styleInput = const LogoStyleInput.pure(
       field: "style",
     ),
+    super.formKey,
   });
 
   /// Input for the name of the logo
-  final StringInput nameInput;
+  StringInput nameInput;
 
   /// Input for the image of the logo
-  final StringInput domainInput;
+  StringInput domainInput;
 
   /// Input for the category of the logo
-  final LogoCategoryInput categoryInput;
+  LogoCategoryInput categoryInput;
 
   /// Input for the style of the logo
-  final LogoStyleInput styleInput;
+  LogoStyleInput styleInput;
 
   @override
-  // TODO: implement inputs
   List<InputEntity> get inputs => [
         nameInput,
         domainInput,

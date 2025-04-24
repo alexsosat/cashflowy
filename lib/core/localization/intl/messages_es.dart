@@ -22,18 +22,36 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accountTypeSelect": MessageLookupByLibrary.simpleMessage(
+      "selecciona un tipo de cuenta",
+    ),
     "appDirectoryNotFound": MessageLookupByLibrary.simpleMessage(
       "Ruta de directorio no encontrada",
     ),
+    "bankCardTypeSelect": MessageLookupByLibrary.simpleMessage(
+      "selecciona el tipo de tarjeta",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("cancelar"),
+    "colorSelect": MessageLookupByLibrary.simpleMessage("selecciona un color"),
     "confirm": MessageLookupByLibrary.simpleMessage("confirmar"),
     "createLogoErrorTitle": MessageLookupByLibrary.simpleMessage(
       "Ocurrío un error al crear el logo",
+    ),
+    "creditCardAmountLimit": MessageLookupByLibrary.simpleMessage(
+      "Límite de crédito",
+    ),
+    "currencySelect": MessageLookupByLibrary.simpleMessage(
+      "selecciona una moneda",
     ),
     "loading": MessageLookupByLibrary.simpleMessage("cargando"),
     "logoDirectoryErrorTitle": MessageLookupByLibrary.simpleMessage(
       "Ocurrió un error al obtener el directorio de logos",
     ),
+    "logoSelect": MessageLookupByLibrary.simpleMessage("selecciona un logo"),
+    "logosRetrieveAllError": MessageLookupByLibrary.simpleMessage(
+      "Error al obtener los logos",
+    ),
+    "name": MessageLookupByLibrary.simpleMessage("nombre"),
     "noInfoAvailable": MessageLookupByLibrary.simpleMessage(
       "no hay información disponible",
     ),

@@ -9,13 +9,13 @@ import '../../enums/logo_category_enum.dart';
 class LogoCategoryInput extends InputEntity<LogoCategoryEnum?> {
   const LogoCategoryInput.pure({
     required super.field,
-    required super.validators,
+    super.validators,
   }) : super.pure(value: null);
 
   const LogoCategoryInput.dirty({
     required super.field,
     required super.value,
-    required super.validators,
+    super.validators,
   }) : super.dirty();
 
   @override

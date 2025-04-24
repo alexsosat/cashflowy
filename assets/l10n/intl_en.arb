@@ -1,8 +1,13 @@
 {
   "@@locale": "en",
+  "appDirectoryNotFound": "Directory path not found",
   "cancel": "cancel",
   "confirm": "confirm",
+  "createLogoErrorTitle": "An error occurred while creating the logo",
   "loading": "loading",
+  "logoDirectoryErrorTitle": "An error occurred while obtaining the logo directory.",
+  "logoSelect": "select a logo",
+  "logosRetrieveAllError": "Error retrieving logos",
   "noInfoAvailable": "no information available",
   "noItemsFound": "no items found",
   "refreshPage": "refresh page",
