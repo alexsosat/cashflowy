@@ -1,12 +1,12 @@
 import "package:dropdown_search/dropdown_search.dart";
 import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:form_builder_dropdown_search/form_builder_dropdown_search.dart";
 
 import "../../../../../core/constants/theme/material_theme.dart";
 import "../../../../../core/extensions/string_extension.dart";
 import "../../../../../core/extensions/theme_extension.dart";
 import "../../../../../core/localization/l10n.dart";
-import "../../../../shared/presentation/widgets/form_fields/form_builder_dropdown_search/form_builder_dropdown_search.dart";
 import "../../../business/entities/enums/account_type_enum.dart";
 
 /// Form field to select an account type via a bottom sheet
@@ -29,11 +29,13 @@ class FormBuilderAccountTypeBottomSheetField extends StatelessWidget {
   final ValueChanged<AccountTypeEnum?>? onChanged;
 
   /// Key to access the bottom sheet.
-  final GlobalKey<DropdownSearchState<AccountTypeEnum>>? bottomSheetKey;
+  final GlobalKey<FormBuilderDropdownSearchState<AccountTypeEnum>>?
+      bottomSheetKey;
 
   @override
   Widget build(BuildContext context) =>
       FormBuilderDropdownSearch<AccountTypeEnum>(
+        key: bottomSheetKey,
         name: name,
         items: (_, __) => AccountTypeEnum.values,
         popupProps: PopupProps.modalBottomSheet(
@@ -67,7 +69,6 @@ class FormBuilderAccountTypeBottomSheetField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: AppLocalizations.current.accountTypeSelect.toCapitalized(),
         ),
-        bottomSheetKey: bottomSheetKey,
         onChanged: onChanged,
         itemAsString: (item) => item.name,
         compareFn: (item1, item2) => item1 == item2,

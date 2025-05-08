@@ -135,6 +135,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Tasa de interés`
+  String get interestRate {
+    return Intl.message(
+      'Tasa de interés',
+      name: 'interestRate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `cargando`
   String get loading {
     return Intl.message('cargando', name: 'loading', desc: '', args: []);
@@ -195,6 +205,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Fecha de pago`
+  String get paymentDate {
+    return Intl.message(
+      'Fecha de pago',
+      name: 'paymentDate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `reintentar`
   String get refreshPage {
     return Intl.message('reintentar', name: 'refreshPage', desc: '', args: []);
@@ -203,6 +223,16 @@ class AppLocalizations {
   /// `buscar`
   String get search {
     return Intl.message('buscar', name: 'search', desc: '', args: []);
+  }
+
+  /// `Fecha de corte`
+  String get statementDate {
+    return Intl.message(
+      'Fecha de corte',
+      name: 'statementDate',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `ocurrió un error inesperado`

@@ -18,6 +18,26 @@ class _CreateCardAccountForm extends StatefulWidget {
 }
 
 class _CreateCardAccountFormState extends State<_CreateCardAccountForm> {
+  late GlobalKey<FormBuilderDropdownSearchState<BankCardTypeEnum>>
+      _cardTypeBottomSheetKey;
+
+  late bool _showCreditCardAccountForm;
+
+  @override
+  void initState() {
+    _cardTypeBottomSheetKey =
+        GlobalKey<FormBuilderDropdownSearchState<BankCardTypeEnum>>();
+
+    _showCreditCardAccountForm = false;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _cardTypeBottomSheetKey.currentState?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Column(
         children: [
@@ -25,6 +45,7 @@ class _CreateCardAccountFormState extends State<_CreateCardAccountForm> {
             height: 60,
           ),
           FormBuilderTextField(
+            autofocus: true,
             name: widget.formEntity.cardNumberInput.field,
             keyboardType: TextInputType.number,
             maxLines: 1,
@@ -38,14 +59,30 @@ class _CreateCardAccountFormState extends State<_CreateCardAccountForm> {
               ),
             ],
             onTapOutside: (_) => hideKeyboard(),
+            onSubmitted: _onCardNumberSubmit,
           ),
           AppSeparators.vMedium,
           FormBuilderCardTypeBottomSheetField(
-            name: widget.formEntity.cardNumberInput.field,
+            bottomSheetKey: _cardTypeBottomSheetKey,
+            name: widget.formEntity.cardTypeInput.field,
+            onChanged: _onCardTypeChanged,
           ),
-          _CreateCreditCardAccountForm(
-            formEntity: widget.formEntity,
+          Visibility(
+            visible: _showCreditCardAccountForm,
+            child: _CreateCreditCardAccountForm(
+              formEntity: widget.formEntity,
+            ),
           ),
         ],
       );
+
+  void _onCardNumberSubmit(String? value) =>
+      _cardTypeBottomSheetKey.currentState?.openDropDownSearch();
+
+  void _onCardTypeChanged(BankCardTypeEnum? value) {
+    if (value == null) return;
+    setState(
+      () => _showCreditCardAccountForm = value == BankCardTypeEnum.CREDIT,
+    );
+  }
 }

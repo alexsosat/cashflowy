@@ -9,6 +9,7 @@
   "createLogoErrorTitle": "Ocurrío un error al crear el logo",
   "creditCardAmountLimit": "Límite de crédito",
   "currencySelect": "selecciona una moneda",
+  "interestRate": "Tasa de interés",
   "loading": "cargando",
   "logoDirectoryErrorTitle": "Ocurrió un error al obtener el directorio de logos",
   "logoSelect": "selecciona un logo",
@@ -16,7 +17,9 @@
   "name": "nombre",
   "noInfoAvailable": "no hay información disponible",
   "noItemsFound": "no se encontraron elementos",
+  "paymentDate": "Fecha de pago",
   "refreshPage": "reintentar",
   "search": "buscar",
+  "statementDate": "Fecha de corte",
   "unexpectedError": "ocurrió un error inesperado"
 }

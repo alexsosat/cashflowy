@@ -1,6 +1,7 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_dropdown_search/form_builder_dropdown_search.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../core/constants/theme/app_separators.dart';
 import '../../../../core/extensions/string_extension.dart';
@@ -12,6 +13,7 @@ import '../../../shared/presentation/helpers/hide_keyboard.dart';
 import '../../../shared/presentation/widgets/form_fields/form_builder_amount_field/form_builder_amount_field.dart';
 import '../../../shared/presentation/widgets/form_fields/form_builder_color_picker/form_builder_color_picker_field.dart';
 import '../../business/entities/enums/account_type_enum.dart';
+import '../../business/entities/enums/bank_card_type_enum.dart';
 import '../../business/forms/create_account_form_entity.dart';
 import '../widgets/form_fields/form_builder_account_type_bottomsheet_field.dart';
 import '../widgets/form_fields/form_builder_card_type_bottomsheet_field.dart';
@@ -32,10 +34,13 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
   late CreateAccountFormEntity _formEntity;
   late GlobalKey<FormBuilderState> _formKey;
 
-  late GlobalKey<DropdownSearchState<CurrencyEntity>> _currencyBottomSheetKey;
+  late GlobalKey<FormBuilderDropdownSearchState<CurrencyEntity>>
+      _currencyBottomSheetKey;
   late FocusNode _colorPickerFocusNode;
-  late GlobalKey<DropdownSearchState<AccountTypeEnum>>
+  late GlobalKey<FormBuilderDropdownSearchState<AccountTypeEnum>>
       _accountTypeBottomSheetKey;
+
+  late bool _showCardAccountForm;
 
   @override
   void initState() {
@@ -44,10 +49,13 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
       formKey: _formKey,
     );
 
-    _currencyBottomSheetKey = GlobalKey<DropdownSearchState<CurrencyEntity>>();
+    _currencyBottomSheetKey =
+        GlobalKey<FormBuilderDropdownSearchState<CurrencyEntity>>();
     _colorPickerFocusNode = FocusNode();
     _accountTypeBottomSheetKey =
-        GlobalKey<DropdownSearchState<AccountTypeEnum>>();
+        GlobalKey<FormBuilderDropdownSearchState<AccountTypeEnum>>();
+
+    _showCardAccountForm = false;
     super.initState();
   }
 
@@ -67,6 +75,7 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           children: [
             FormBuilderTextField(
               name: _formEntity.nameInput.field,
+              autofocus: true,
               decoration: InputDecoration(
                 labelText: AppLocalizations.current.name.toCapitalized(),
               ),
@@ -95,15 +104,28 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
               bottomSheetKey: _accountTypeBottomSheetKey,
               onChanged: _onAccountTypeChanged,
             ),
-            _CreateCardAccountForm(
-              formEntity: _formEntity,
+            Visibility(
+              visible: _showCardAccountForm,
+              child: _CreateCardAccountForm(
+                formEntity: _formEntity,
+              ),
+            ),
+            AppSeparators.vLarge,
+            FilledButton(
+              onPressed: _onFormSubmit,
+              child: Text("Submit"),
             ),
           ],
         ),
       );
 
-  void _onNameSubmit(String? value) =>
-      _currencyBottomSheetKey.currentState?.openDropDownSearch();
+  void _onNameSubmit(String? value) {
+    final state = _currencyBottomSheetKey.currentState;
+
+    print(state);
+
+    _currencyBottomSheetKey.currentState?.openDropDownSearch();
+  }
 
   void _onCurrencyChanged(CurrencyEntity? value) {
     if (value == null) return;
@@ -114,10 +136,23 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
   void _onColorChanged(Color? value) {
     if (value == null) return;
 
+    print("Color selected: ${_accountTypeBottomSheetKey.currentState}");
+
     _accountTypeBottomSheetKey.currentState?.openDropDownSearch();
   }
 
   void _onAccountTypeChanged(AccountTypeEnum? value) {
     if (value == null) return;
+
+    setState(() => _showCardAccountForm = value == AccountTypeEnum.CARD);
+  }
+
+  void _onFormSubmit() {
+    if (!_formEntity.saveAndValidate()) {
+      print("Form is not valid: ${_formEntity.errorList}");
+      return;
+    }
+
+    print("Form is valid: ${_formEntity.values}");
   }
 }

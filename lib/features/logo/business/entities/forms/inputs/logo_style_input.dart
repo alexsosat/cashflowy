@@ -15,13 +15,13 @@ class LogoStyleInput extends InputEntity<LogoStyleEnum?> {
   const LogoStyleInput.dirty({
     required super.field,
     required super.value,
-    super.validators,
+    super.validators = const [],
   }) : super.dirty();
 
   @override
   LogoStyleInput dirty({
     LogoStyleEnum? value,
-    List<TranslatedValidator<LogoStyleEnum>>? validators,
+    List<TranslatedValidator<LogoStyleEnum?>>? validators,
   }) =>
       LogoStyleInput.dirty(
         field: field,

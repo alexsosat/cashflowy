@@ -1,6 +1,6 @@
-import "package:dropdown_search/dropdown_search.dart";
 import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:form_builder_dropdown_search/form_builder_dropdown_search.dart";
 import "package:get_it/get_it.dart";
 
 import "../../../../../core/constants/theme/material_theme.dart";
@@ -32,7 +32,8 @@ class FormBuilderCurrencyBottomSheetField extends StatelessWidget {
   final ValueChanged<CurrencyEntity?>? onChanged;
 
   /// Key to access the bottom sheet.
-  final GlobalKey<DropdownSearchState<CurrencyEntity>>? bottomSheetKey;
+  final GlobalKey<FormBuilderDropdownSearchState<CurrencyEntity>>?
+      bottomSheetKey;
 
   @override
   Widget build(BuildContext context) =>

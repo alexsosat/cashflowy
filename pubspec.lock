@@ -531,6 +531,15 @@ packages:
       url: "https://github.com/OCasosa/font_awesome_flutter.git"
     source: git
     version: "10.8.0"
+  form_builder_dropdown_search:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "0.0.3"
+      resolved-ref: a55ac7bb8da7a4441c0ce127ebce2fedeedfc093
+      url: "https://github.com/alexsosat/form_builder_dropdown_search.git"
+    source: git
+    version: "0.0.3"
   form_builder_validators:
     dependency: "direct main"
     description:
@@ -543,11 +552,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.2"
-      resolved-ref: c72a430f10b483305604dd44f5e019670d9768ff
+      ref: "0.0.5"
+      resolved-ref: "3fd50f19ad9e99ae6c9509955c4548e2115b6143"
       url: "https://github.com/alexsosat/form_builder_z.git"
     source: git
-    version: "0.0.2"
+    version: "0.0.5"
   formz:
     dependency: transitive
     description:
@@ -1234,5 +1243,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.6.0 <4.0.0"
+  dart: ">=3.6.1 <4.0.0"
   flutter: ">=3.27.0"

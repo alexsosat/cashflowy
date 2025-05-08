@@ -1,28 +1,28 @@
 import "package:form_builder_validators/form_builder_validators.dart";
 import "package:form_builder_z/models/input_entity.dart";
 
-import "../../entities/enums/account_type_enum.dart";
+import "../../entities/enums/bank_card_type_enum.dart";
 
 /// Input for providing an account type input field
-class AccountTypeInput extends InputEntity<AccountTypeEnum?> {
+class CardTypeInput extends InputEntity<BankCardTypeEnum?> {
   /// Input for providing an account type input field
-  const AccountTypeInput.pure({
+  const CardTypeInput.pure({
     required super.field,
-    required super.validators,
+    super.validators,
   }) : super.pure(value: null);
 
-  const AccountTypeInput.dirty({
+  const CardTypeInput.dirty({
     required super.field,
     required super.value,
     required super.validators,
   }) : super.dirty();
 
   @override
-  AccountTypeInput dirty({
-    AccountTypeEnum? value,
-    List<TranslatedValidator<AccountTypeEnum?>>? validators,
+  CardTypeInput dirty({
+    BankCardTypeEnum? value,
+    List<TranslatedValidator<BankCardTypeEnum?>>? validators,
   }) =>
-      AccountTypeInput.dirty(
+      CardTypeInput.dirty(
         field: field,
         value: value,
         validators: validators ?? this.validators,

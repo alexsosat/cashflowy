@@ -1,12 +1,12 @@
 import "package:dropdown_search/dropdown_search.dart";
 import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:form_builder_dropdown_search/form_builder_dropdown_search.dart";
 
 import "../../../../../core/constants/theme/material_theme.dart";
 import "../../../../../core/extensions/string_extension.dart";
 import "../../../../../core/extensions/theme_extension.dart";
 import "../../../../../core/localization/l10n.dart";
-import "../../../../shared/presentation/widgets/form_fields/form_builder_dropdown_search/form_builder_dropdown_search.dart";
 import "../../../business/entities/enums/bank_card_type_enum.dart";
 
 /// Form field to select a card type via a bottom sheet
@@ -29,11 +29,13 @@ class FormBuilderCardTypeBottomSheetField extends StatelessWidget {
   final ValueChanged<BankCardTypeEnum?>? onChanged;
 
   /// Key to access the bottom sheet.
-  final GlobalKey<DropdownSearchState<BankCardTypeEnum>>? bottomSheetKey;
+  final GlobalKey<FormBuilderDropdownSearchState<BankCardTypeEnum>>?
+      bottomSheetKey;
 
   @override
   Widget build(BuildContext context) =>
       FormBuilderDropdownSearch<BankCardTypeEnum>(
+        key: bottomSheetKey,
         name: name,
         items: (_, __) => BankCardTypeEnum.values,
         popupProps: PopupProps.modalBottomSheet(
@@ -68,7 +70,6 @@ class FormBuilderCardTypeBottomSheetField extends StatelessWidget {
           labelText:
               AppLocalizations.current.bankCardTypeSelect.toCapitalized(),
         ),
-        bottomSheetKey: bottomSheetKey,
         onChanged: onChanged,
         itemAsString: (item) => item.name,
         compareFn: (item1, item2) => item1 == item2,

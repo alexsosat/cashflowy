@@ -15,18 +15,18 @@ class LogoCategoryInput extends InputEntity<LogoCategoryEnum?> {
   const LogoCategoryInput.dirty({
     required super.field,
     required super.value,
-    super.validators,
+    required super.validators,
   }) : super.dirty();
 
   @override
   LogoCategoryInput dirty({
+    required List<TranslatedValidator<LogoCategoryEnum?>> validators,
     LogoCategoryEnum? value,
-    List<TranslatedValidator<LogoCategoryEnum>>? validators,
   }) =>
       LogoCategoryInput.dirty(
         field: field,
         value: value ?? this.value,
-        validators: validators ?? this.validators,
+        validators: validators,
       );
 
   @override

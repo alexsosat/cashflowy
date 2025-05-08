@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "currencySelect": MessageLookupByLibrary.simpleMessage(
       "selecciona una moneda",
     ),
+    "interestRate": MessageLookupByLibrary.simpleMessage("Tasa de interés"),
     "loading": MessageLookupByLibrary.simpleMessage("cargando"),
     "logoDirectoryErrorTitle": MessageLookupByLibrary.simpleMessage(
       "Ocurrió un error al obtener el directorio de logos",
@@ -58,8 +59,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noItemsFound": MessageLookupByLibrary.simpleMessage(
       "no se encontraron elementos",
     ),
+    "paymentDate": MessageLookupByLibrary.simpleMessage("Fecha de pago"),
     "refreshPage": MessageLookupByLibrary.simpleMessage("reintentar"),
     "search": MessageLookupByLibrary.simpleMessage("buscar"),
+    "statementDate": MessageLookupByLibrary.simpleMessage("Fecha de corte"),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "ocurrió un error inesperado",
     ),

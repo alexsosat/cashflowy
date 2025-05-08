@@ -12,17 +12,9 @@ class CreateLogoFormEntity extends FormEntity {
   CreateLogoFormEntity({
     this.nameInput = const StringInput.pure(
       field: "name",
-      validators: [
-        RequiredValidator(),
-        MaxLengthValidator(50),
-      ],
     ),
     this.domainInput = const StringInput.pure(
       field: "domain",
-      validators: [
-        RequiredValidator(),
-        MaxLengthValidator(256),
-      ],
     ),
     this.categoryInput = const LogoCategoryInput.pure(
       field: "category",
@@ -57,14 +49,25 @@ class CreateLogoFormEntity extends FormEntity {
   void save(Map<String, dynamic> fields) {
     nameInput = nameInput.dirty(
       value: fields[nameInput.field] as String?,
+      validators: [
+        const RequiredValidator(),
+        const MaxLengthValidator(50),
+      ],
     );
 
     domainInput = domainInput.dirty(
       value: fields[domainInput.field] as String?,
+      validators: [
+        const RequiredValidator(),
+        const MaxLengthValidator(256),
+      ],
     );
 
     categoryInput = categoryInput.dirty(
       value: fields[categoryInput.field] as LogoCategoryEnum?,
+      validators: [
+        const RequiredValidator(),
+      ],
     );
 
     styleInput = styleInput.dirty(
