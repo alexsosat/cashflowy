@@ -29,4 +29,16 @@ abstract class AccountEntity extends Equatable {
 
   /// Currency of the account
   final String currency;
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        color,
+        type,
+        currency,
+      ];
+
+  @override
+  bool get stringify => true;
 }

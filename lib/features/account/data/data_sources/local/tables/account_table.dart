@@ -11,7 +11,7 @@ class AccountTable extends Table {
   late final name = text().withLength(min: 4, max: 64)();
 
   /// Color of the account represented stored in hexadecimal value
-  late final color = text().nullable().withLength(max: 7)();
+  late final color = text().withLength(max: 7)();
 
   /// Currency of the account
   ///
